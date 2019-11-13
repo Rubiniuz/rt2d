@@ -14,14 +14,13 @@ MyScene::MyScene() : Scene()
 	// start the timer.
 	t.start();
 
-	// create a single instance of MyEntity in the middle of the screen.
-	// the Sprite is added in Constructor of MyEntity.
-	myentity = new MyEntity();
-	myentity->position = Point2(SWIDTH/2, SHEIGHT/2);
+	int entity = 0;
 
-	// create the scene 'tree'
-	// add myentity to this Scene as a child.
-	this->addChild(myentity);
+	do
+	{ 
+		this->addChild(createEntity(entity * 25, entity * 50));
+		entity++;
+	} while (entity <= 8);
 }
 
 
@@ -57,8 +56,23 @@ void MyScene::update(float deltaTime)
 	// Rotate color
 	// ###############################################################
 	if (t.seconds() > 0.0333f) {
-		RGBAColor color = myentity->sprite()->color;
-		myentity->sprite()->color = Color::rotate(color, 0.01f);
-		t.start();
+		for (int i = 0; i <= 8; i++)
+		{
+			if (getChild(i))
+			{
+
+			}
+			RGBAColor color = this->getChild(i)->sprite()->color;
+			getChild(i)->sprite()->color = Color::rotate(color, 0.01f);
+			t.start();
+		}
 	}
+}
+
+MyEntity* MyScene::createEntity(float x, float y)
+{
+	myentity = new MyEntity();
+	myentity->position = Point2(x, y);
+	if (myentity != nullptr){ return myentity; }
+	else { return nullptr; }
 }

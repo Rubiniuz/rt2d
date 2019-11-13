@@ -27,6 +27,9 @@ public:
 	/// @return void
 	virtual void update(float deltaTime);
 
+	/// @function for making entity
+	virtual MyEntity* createEntity(float x, float y);
+
 private:
 	/// @brief the rotating square in the middle of the screen
 	MyEntity* myentity;
