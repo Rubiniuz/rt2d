@@ -156,6 +156,8 @@ IF(MAKE_START)
 		start/myentity.h
 		start/myscene.cpp
 		start/myscene.h
+		start/myspaceship.cpp
+		start/myspaceship.h
 	)
 	target_link_libraries(start
 		${ALL_GRAPHICS_LIBS}

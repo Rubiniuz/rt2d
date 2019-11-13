@@ -12,6 +12,7 @@
 #include <rt2d/scene.h>
 
 #include "myentity.h"
+#include "myspaceship.h"
 
 /// @brief The MyScene class is the Scene implementation.
 class MyScene : public Scene
@@ -29,10 +30,12 @@ public:
 
 	/// @function for making entity
 	virtual MyEntity* createEntity(float x, float y);
+	virtual MySpaceShip* createSpaceShip(float x, float y);
 
 private:
 	/// @brief the rotating square in the middle of the screen
 	MyEntity* myentity;
+	MySpaceShip* myspaceship;
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
 };

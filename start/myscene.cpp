@@ -13,7 +13,6 @@ MyScene::MyScene() : Scene()
 {
 	// start the timer.
 	t.start();
-
 	int entity = 0;
 
 	do
@@ -58,10 +57,7 @@ void MyScene::update(float deltaTime)
 	if (t.seconds() > 0.0333f) {
 		for (int i = 0; i <= 8; i++)
 		{
-			if (getChild(i))
-			{
 
-			}
 			RGBAColor color = this->getChild(i)->sprite()->color;
 			getChild(i)->sprite()->color = Color::rotate(color, 0.01f);
 			t.start();
@@ -74,5 +70,14 @@ MyEntity* MyScene::createEntity(float x, float y)
 	myentity = new MyEntity();
 	myentity->position = Point2(x, y);
 	if (myentity != nullptr){ return myentity; }
+	else { return nullptr; }
+}
+
+MySpaceShip* MyScene::createSpaceShip(float x, float y)
+{
+	myspaceship = new MySpaceShip();
+	myspaceship->position = Point2(x, y);
+	myspaceship->pos = Vector2(x, y);
+	if (myspaceship != nullptr) { return myspaceship; }
 	else { return nullptr; }
 }
