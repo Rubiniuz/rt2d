@@ -15,7 +15,7 @@ if [ "$OSTYPE" == "win32" ] || [ "$OSTYPE" == "msys" ]; then
 	echo "Right-click 'demo' tab and select 'Set as StartUp Project'. Then press <ctrl>-F5."
 else
 	make
-	./demo
+	./game
 fi
 
 cd ..

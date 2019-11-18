@@ -15,6 +15,7 @@
  */
 #include <rt2d/core.h>
 
+#include "menu.h"
 #include "myscene.h"
 
 /// @brief main entry point
@@ -22,6 +23,13 @@ int main( void )
 {
 	// Core instance
 	Core core;
+
+	// menu
+	MyMenu* mymenu = new MyMenu(); // create menu on the heap
+	while(mymenu->isRunning()) { // check status of menu every frame
+		core.run(mymenu); // update and render the current scene
+		core.showFrameRate(5); // show framerate in output every n seconds
+	}
 
 	// Scene01
 	MyScene* myscene = new MyScene(); // create Scene on the heap
@@ -31,7 +39,7 @@ int main( void )
 	}
 	//core.cleanup(); // cleanup ResourceManager (Textures + Meshes, but not Shaders)
 	delete myscene; // delete Scene and everything in it from the heap to make space for next Scene
-
+	delete mymenu;
 	// No need to explicitly clean up the core.
 	// As a local var, core will go out of scope and destroy Renderer->ResourceManager.
 	// ResourceManager destructor also deletes Shaders.
