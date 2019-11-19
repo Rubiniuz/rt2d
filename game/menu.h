@@ -11,6 +11,8 @@
 
 #include <rt2d/scene.h>
 
+#include "canvas.h"
+
 #include "myentity.h"
 
 /// @brief The MyScene class is the Scene implementation.
@@ -28,6 +30,10 @@ public:
 	virtual void update(float deltaTime);
 
 private:
+	Canvas* canvas;
+	PixelSprite player;
+
+	void setupPlayer();
 
 };
 
