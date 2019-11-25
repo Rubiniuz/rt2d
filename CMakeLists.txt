@@ -7,7 +7,7 @@ project (rt2d)
 OPTION(MAKE_START "Make RT2D start application" OFF)
 OPTION(MAKE_GAME "Make RT2D game application" ON)
 OPTION(MAKE_DEMO "Make RT2D demo (tests) application" OFF)
-OPTION(MAKE_CANVAS_DEMO "Make RT2D Canvas demo (tests) application" ON)
+OPTION(MAKE_CANVAS_DEMO "Make RT2D Canvas demo (tests) application" OFF)
 OPTION(MAKE_FLOCKING "Make flocking application" OFF)
 OPTION(MAKE_BASIC3D "Make basic3D application" OFF)
 OPTION(MAKE_NOISE "Make Perlin Noise application" OFF)
@@ -175,12 +175,12 @@ ENDIF()
 IF(MAKE_GAME)
 	add_executable(game
 		game/main.cpp
-		game/myentity.cpp
-		game/myentity.h
+    game/layer.cpp
+    game/layer.h
 		game/myscene.cpp
 		game/myscene.h
-    game/menu.cpp
-    game/menu.h
+    game/scenemanager.cpp
+    game/scenemanager.h
 	)
 	target_link_libraries(game
 		${ALL_GRAPHICS_LIBS}

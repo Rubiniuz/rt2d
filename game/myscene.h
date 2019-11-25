@@ -11,7 +11,7 @@
 
 #include <rt2d/scene.h>
 
-#include "myentity.h"
+#include "layer.h"
 
 /// @brief The MyScene class is the Scene implementation.
 class MyScene : public Scene
@@ -27,13 +27,15 @@ public:
 	/// @return void
 	virtual void update(float deltaTime);
 
+	static int activescene;
+
+protected:
+	unsigned int top_layer;
+	std::vector<Layer*> layers;
+	void moveCamera(float deltaTime);
+
 private:
-	/// @brief the rotating square in the middle of the screen
-	MyEntity* myentity;
-	/// @brief the rotating square in the left top of the screen
-	MyEntity* myentity2;
-	/// @brief a Timer to rotate the color every n seconds
-	Timer t;
+	Timer fpstimer;
 };
 
 #endif /* SCENE00_H */
