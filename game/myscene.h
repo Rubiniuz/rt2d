@@ -10,6 +10,8 @@
 #define MYSCENE_H
 
 #include <rt2d/scene.h>
+#include <rt2d/canvas.h>
+#include <rt2d/vectorx.h>
 
 #include "layer.h"
 

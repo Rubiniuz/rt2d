@@ -1,0 +1,7 @@
+for all info look at projects/canvasdemo/scene12
+
+canvas
+pixelsprite
+pixel
+
+needed entity
