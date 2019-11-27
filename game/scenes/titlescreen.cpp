@@ -13,6 +13,11 @@ TitleScreen::TitleScreen() : MyScene()
 		layers.push_back(layer);
 		this->addChild(layer);
 	}
+
+  startbutton = new Button();
+  startbutton->position = Point2(SWIDTH/2, SHEIGHT/2);
+  layers[1]->addChild(startbutton);
+
 }
 
 TitleScreen::~TitleScreen()

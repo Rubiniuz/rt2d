@@ -7,6 +7,7 @@
 #include <rt2d/vectorx.h>
 
 #include "../myscene.h"
+#include "../ui/button.h"
 
 class TitleScreen : public MyScene
 {
@@ -24,6 +25,7 @@ public:
   static int activescene;
 
 private:
+  Button* startbutton;
   Timer fpstimer;
 };
 

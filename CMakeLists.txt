@@ -181,6 +181,8 @@ IF(MAKE_GAME)
     game/scenemanager.h
     game/scenes/titlescreen.cpp
     game/scenes/titlescreen.h
+    game/ui/button.cpp
+    game/ui/button.h
 	)
 	target_link_libraries(game
 		${ALL_GRAPHICS_LIBS}
@@ -188,7 +190,7 @@ IF(MAKE_GAME)
 	# Copy assets to the build directory
 	file(
 		COPY game/assets
-		DESTINATION ${CMAKE_BINARY_DIR}
+    DESTINATION ${CMAKE_BINARY_DIR}
 	)
 ENDIF()
 
