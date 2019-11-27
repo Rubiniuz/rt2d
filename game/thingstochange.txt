@@ -1,4 +1,5 @@
-for all info look at projects/canvasdemo/scene12
+for all info look at
+projects/canvasdemo/scene12
 
 canvas
 pixelsprite

@@ -1,12 +1,12 @@
-#include "myscene.h"
+#include "titlescreen.h"
 
-int MyScene::activescene = 0;
+int TitleScreen::activescene = 0;
 
-MyScene::MyScene() : Scene()
+TitleScreen::TitleScreen() : MyScene()
 {
-	fpstimer.start();
+  fpstimer.start();
 
-	top_layer = 3; // 8 layers (0-7)
+  top_layer = 3; // 3 layers (0-2)
 
 	for (unsigned int i = 0; i <= top_layer; i++) {
 		Canvas* layer = new Canvas();
@@ -15,10 +15,9 @@ MyScene::MyScene() : Scene()
 	}
 }
 
-
-MyScene::~MyScene()
+TitleScreen::~TitleScreen()
 {
-	int ls = layers.size();
+  int ls = layers.size();
 	for (int i=0; i<ls; i++) {
 		this->removeChild(layers[i]);
 		delete layers[i];
@@ -27,9 +26,9 @@ MyScene::~MyScene()
 	layers.clear();
 }
 
-void MyScene::update(float deltaTime)
+void TitleScreen::update(float deltaTime)
 {
-	// ###############################################################
+  // ###############################################################
 	// show FPS
 	// ###############################################################
 	static int framecounter = 0;
@@ -40,4 +39,19 @@ void MyScene::update(float deltaTime)
 		fpstimer.start();
 	}
 	framecounter++;
+}
+
+void TitleScreen::StartGame()
+{
+
+}
+
+void TitleScreen::Credits()
+{
+
+}
+
+void TitleScreen::Exit()
+{
+
 }

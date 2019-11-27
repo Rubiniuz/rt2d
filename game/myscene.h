@@ -13,7 +13,6 @@
 #include <rt2d/canvas.h>
 #include <rt2d/vectorx.h>
 
-#include "layer.h"
 
 /// @brief The MyScene class is the Scene implementation.
 class MyScene : public Scene
@@ -33,7 +32,7 @@ public:
 
 protected:
 	unsigned int top_layer;
-	std::vector<Layer*> layers;
+	std::vector<Canvas*> layers;
 	void moveCamera(float deltaTime);
 
 private:
