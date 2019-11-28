@@ -1,6 +1,6 @@
 #include "layer.h"
 
-Layer::Layer() : Entity()
+Layer::Layer() : Canvas()
 {
 
 }

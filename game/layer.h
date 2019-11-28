@@ -3,7 +3,7 @@
 
 #include <rt2d/canvas.h>
 
-class Layer : public Entity
+class Layer : public Canvas
 {
 public:
   Layer();
