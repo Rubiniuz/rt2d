@@ -8,6 +8,7 @@
 
 #include "../myscene.h"
 #include "../ui/button.h"
+#include "../layer.h"
 
 class TitleScreen : public MyScene
 {

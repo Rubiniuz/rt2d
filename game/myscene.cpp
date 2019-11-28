@@ -9,7 +9,7 @@ MyScene::MyScene() : Scene()
 	top_layer = 3; // 8 layers (0-7)
 
 	for (unsigned int i = 0; i <= top_layer; i++) {
-		Canvas* layer = new Canvas();
+		Layer* layer = new Layer();
 		layers.push_back(layer);
 		this->addChild(layer);
 	}

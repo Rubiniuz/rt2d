@@ -12,7 +12,7 @@
 #include <rt2d/scene.h>
 #include <rt2d/canvas.h>
 #include <rt2d/vectorx.h>
-
+#include "layer.h"
 
 /// @brief The MyScene class is the Scene implementation.
 class MyScene : public Scene

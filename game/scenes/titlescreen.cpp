@@ -9,7 +9,7 @@ TitleScreen::TitleScreen() : MyScene()
   top_layer = 3; // 3 layers (0-2)
 
 	for (unsigned int i = 0; i <= top_layer; i++) {
-		Canvas* layer = new Canvas();
+		Layer* layer = new Layer();
 		layers.push_back(layer);
 		this->addChild(layer);
 	}
@@ -17,7 +17,6 @@ TitleScreen::TitleScreen() : MyScene()
   startbutton = new Button();
   startbutton->position = Point2(SWIDTH/2, SHEIGHT/2);
   layers[1]->addChild(startbutton);
-
 }
 
 TitleScreen::~TitleScreen()

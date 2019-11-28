@@ -177,6 +177,8 @@ IF(MAKE_GAME)
 		game/main.cpp
 		game/myscene.cpp
 		game/myscene.h
+    game/layer.cpp
+    game/layer.h
     game/scenemanager.cpp
     game/scenemanager.h
     game/scenes/titlescreen.cpp
