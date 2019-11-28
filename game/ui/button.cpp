@@ -17,7 +17,7 @@ void Button::update(float deltaTime)
 
 }
 
-void Button::UseSprite(string toGet = "")
+void Button::UseSprite(string toGet)
 {
   this->addSprite(toGet);
 }
