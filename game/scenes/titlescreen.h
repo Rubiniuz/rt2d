@@ -19,6 +19,8 @@ public:
 
   virtual void update(float deltaTime);
 
+  void MakeBackground();
+
   void StartGame();
   void Credits();
   void Exit();

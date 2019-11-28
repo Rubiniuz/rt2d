@@ -10,13 +10,17 @@ TitleScreen::TitleScreen() : MyScene()
 
 	for (unsigned int i = 0; i <= top_layer; i++) {
 		Layer* layer = new Layer();
+    layer->Init(8);
 		layers.push_back(layer);
 		this->addChild(layer);
 	}
 
+  MakeBackground();
+
   startbutton = new Button();
   startbutton->position = Point2(SWIDTH/2, SHEIGHT/2);
-  layers[1]->addChild(startbutton);
+  startbutton->UseSprite("assets/startbutton.tga");
+  layers[1]->canvas->addChild(startbutton);
 }
 
 TitleScreen::~TitleScreen()
@@ -43,6 +47,17 @@ void TitleScreen::update(float deltaTime)
 		fpstimer.start();
 	}
 	framecounter++;
+}
+
+void TitleScreen::MakeBackground()
+{
+  for (size_t i = 0; i < SHEIGHT; i++) {
+    for (size_t j = 0; j < SWIDTH; j++) {
+      layers[0]->canvas->setPixel(i, j, GREEN);
+      layers[1]->canvas->setPixel(i, j, RED);
+      layers[2]->canvas->setPixel(i, j, BLUE);
+    }
+  }
 }
 
 void TitleScreen::StartGame()

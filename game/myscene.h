@@ -32,7 +32,7 @@ public:
 
 protected:
 	unsigned int top_layer;
-	std::vector<Canvas*> layers;
+	std::vector<Layer*> layers;
 	void moveCamera(float deltaTime);
 
 private:

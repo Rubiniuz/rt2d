@@ -10,6 +10,7 @@ MyScene::MyScene() : Scene()
 
 	for (unsigned int i = 0; i <= top_layer; i++) {
 		Layer* layer = new Layer();
+    layer->Init(8);
 		layers.push_back(layer);
 		this->addChild(layer);
 	}
