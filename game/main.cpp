@@ -15,6 +15,7 @@
  */
 #include <rt2d/core.h>
 #include "scenemanager.h"
+#include "scenes/titlescreen.h"
 #include "myscene.h"
 
 /// @brief main entry point
@@ -25,7 +26,7 @@ int main( void )
 
 	Scenemanager scenemanager;
 
-	scenemanager.AddScene(new MyScene());
+	scenemanager.AddScene(new TitleScreen());
 
 	scenemanager.Init();
 
