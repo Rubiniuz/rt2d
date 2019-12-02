@@ -11,16 +11,12 @@ TitleScreen::TitleScreen() : MyScene()
 
 	for (unsigned int i = 0; i <= top_layer; i++) {
 		Layer* layer = new Layer();
-    layer->Init(8);
-		layers.push_back(layer);
 		this->addChild(layer);
+    layers.push_back(layer);
 	}
 
   MakeBackground();
-
-  startbutton = new Button();
-  startbutton->position = Point2(SWIDTH/2, SHEIGHT/2);
-  layers[1]->addChild(startbutton);
+  MakeButtons();
 }
 
 TitleScreen::~TitleScreen()
@@ -33,13 +29,20 @@ TitleScreen::~TitleScreen()
 	}
 	layers.clear();
 }
+void TitleScreen::MakeButtons()
+{
+  startbutton = new Button();
+  startbutton->position = Point2(SWIDTH/2, SHEIGHT/2);
+  startbutton->scale = Point3(2.0f, 2.0f, 0.0f);
+  layers[1]->addChild(startbutton);
+}
 
 void TitleScreen::MakeBackground()
 {
-  layers[0]->addSprite("assets/background.tga");
-  layers[0]->position = Point2(SWIDTH/2, SHEIGHT/2);
-  layers[0]->sprite()->color = WHITE;
-  layers[0]->sprite()->spritescale = Point_t<float>(10.0f,10.0f,0.0f);
+  background = new Background();
+  background->position = Point2(SWIDTH/2, SHEIGHT/2);
+  background->scale = Point3(3.0f, 3.0f, 0.0f);
+  layers[0]->addChild(background);
 }
 
 void TitleScreen::update(float deltaTime)

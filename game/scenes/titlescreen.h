@@ -9,6 +9,7 @@
 
 #include "../myscene.h"
 #include "../ui/button.h"
+#include "../ui/background.h"
 #include "../layer.h"
 
 class TitleScreen : public MyScene
@@ -21,6 +22,7 @@ public:
   virtual void update(float deltaTime);
 
   void MakeBackground();
+  void MakeButtons();
 
   void StartGame();
   void Credits();
@@ -29,6 +31,7 @@ public:
   static int activescene;
 
 private:
+  Background* background;
   Button* startbutton;
   Timer fpstimer;
 };

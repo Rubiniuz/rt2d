@@ -185,6 +185,8 @@ IF(MAKE_GAME)
     game/scenes/titlescreen.h
     game/ui/button.cpp
     game/ui/button.h
+    game/ui/background.cpp
+    game/ui/background.h
 	)
 	target_link_libraries(game
 		${ALL_GRAPHICS_LIBS}
