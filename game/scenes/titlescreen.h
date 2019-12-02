@@ -8,9 +8,10 @@
 #include <rt2d/texture.h>
 
 #include "../myscene.h"
+#include "../layer.h"
 #include "../ui/button.h"
 #include "../ui/background.h"
-#include "../layer.h"
+
 
 class TitleScreen : public MyScene
 {
@@ -33,6 +34,9 @@ public:
 private:
   Background* background;
   Button* startbutton;
+  Button* creditsbutton;
+  Button* exitbutton;
+
   Timer fpstimer;
 };
 

@@ -32,9 +32,20 @@ TitleScreen::~TitleScreen()
 void TitleScreen::MakeButtons()
 {
   startbutton = new Button();
-  startbutton->position = Point2(SWIDTH/2, SHEIGHT/2);
-  startbutton->scale = Point3(2.0f, 2.0f, 0.0f);
+  startbutton->position = Point2(SWIDTH/2, 400);
+  startbutton->scale = Point3(3.0f, 3.0f, 0.0f);
   layers[1]->addChild(startbutton);
+
+  creditsbutton = new Button();
+  creditsbutton->position = Point2(SWIDTH/2, 460);
+  creditsbutton->scale = Point3(3.0f, 3.0f, 0.0f);
+  layers[1]->addChild(creditsbutton);
+
+  exitbutton = new Button();
+  exitbutton->position = Point2(SWIDTH/2, 520);
+  exitbutton->scale = Point3(3.0f, 3.0f, 0.0f);
+  layers[1]->addChild(exitbutton);
+
 }
 
 void TitleScreen::MakeBackground()
