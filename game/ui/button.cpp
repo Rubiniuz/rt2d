@@ -4,7 +4,7 @@ using namespace std;
 
 Button::Button() : Entity()
 {
-  this->addSprite("assets/none.tga");
+  this->addSprite("assets/startbutton.tga");
 }
 
 Button::~Button()

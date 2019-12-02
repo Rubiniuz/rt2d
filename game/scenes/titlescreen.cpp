@@ -4,6 +4,7 @@ int TitleScreen::activescene = 0;
 
 TitleScreen::TitleScreen() : MyScene()
 {
+  std::cout << "titlescreen constuctor" << std::endl;
   fpstimer.start();
 
   top_layer = 3; // 3 layers (0-2)
@@ -19,8 +20,7 @@ TitleScreen::TitleScreen() : MyScene()
 
   startbutton = new Button();
   startbutton->position = Point2(SWIDTH/2, SHEIGHT/2);
-  startbutton->UseSprite("assets/startbutton.tga");
-  layers[1]->canvas->addChild(startbutton);
+  layers[1]->addChild(startbutton);
 }
 
 TitleScreen::~TitleScreen()
@@ -32,6 +32,14 @@ TitleScreen::~TitleScreen()
 		layers[i] = nullptr;
 	}
 	layers.clear();
+}
+
+void TitleScreen::MakeBackground()
+{
+  layers[0]->addSprite("assets/background.tga");
+  layers[0]->position = Point2(SWIDTH/2, SHEIGHT/2);
+  layers[0]->sprite()->color = WHITE;
+  layers[0]->sprite()->spritescale = Point_t<float>(10.0f,10.0f,0.0f);
 }
 
 void TitleScreen::update(float deltaTime)
@@ -47,17 +55,6 @@ void TitleScreen::update(float deltaTime)
 		fpstimer.start();
 	}
 	framecounter++;
-}
-
-void TitleScreen::MakeBackground()
-{
-  for (size_t i = 0; i < SHEIGHT; i++) {
-    for (size_t j = 0; j < SWIDTH; j++) {
-      layers[0]->canvas->setPixel(i, j, GREEN);
-      layers[1]->canvas->setPixel(i, j, RED);
-      layers[2]->canvas->setPixel(i, j, BLUE);
-    }
-  }
 }
 
 void TitleScreen::StartGame()

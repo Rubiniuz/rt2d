@@ -4,6 +4,7 @@ int MyScene::activescene = 0;
 
 MyScene::MyScene() : Scene()
 {
+	std::cout << "myscene constructor" << std::endl;
 	fpstimer.start();
 
 	top_layer = 3; // 8 layers (0-7)
