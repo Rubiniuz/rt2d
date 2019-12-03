@@ -1,6 +1,6 @@
 #include "scenemanager.h"
 
-Scenemanager::Scenemanager() : Scene()
+Scenemanager::Scenemanager() : Entity()
 {
 	std::cout << "Scenemanager Constructor" << std::endl;
 }

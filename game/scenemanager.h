@@ -2,11 +2,10 @@
 #define SCENEMANAGER_H
 
 #include <vector>
-#include <rt2d/scene.h>
 #include "myscene.h"
 
 /// @brief The Scenemanager class is the Scene implementation.
-class Scenemanager : public Scene
+class Scenemanager : public Entity
 {
 public:
 	Scenemanager();
