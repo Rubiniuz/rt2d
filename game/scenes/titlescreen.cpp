@@ -7,6 +7,8 @@ TitleScreen::TitleScreen() : MyScene()
   std::cout << "titlescreen constuctor" << std::endl;
   fpstimer.start();
 
+  //input = new Input();
+
   top_layer = 3; // 3 layers (0-2)
 
 	for (unsigned int i = 0; i <= top_layer; i++) {
@@ -28,24 +30,29 @@ TitleScreen::~TitleScreen()
 		layers[i] = nullptr;
 	}
 	layers.clear();
+  delete input;
 }
 void TitleScreen::MakeButtons()
 {
   startbutton = new Button();
   startbutton->position = Point2(SWIDTH/2, 400);
   startbutton->scale = Point3(3.0f, 3.0f, 0.0f);
+  buttons.push_back(startbutton);
   layers[1]->addChild(startbutton);
 
   creditsbutton = new Button();
   creditsbutton->position = Point2(SWIDTH/2, 460);
   creditsbutton->scale = Point3(3.0f, 3.0f, 0.0f);
+  buttons.push_back(creditsbutton);
   layers[1]->addChild(creditsbutton);
 
   exitbutton = new Button();
   exitbutton->position = Point2(SWIDTH/2, 520);
   exitbutton->scale = Point3(3.0f, 3.0f, 0.0f);
+  buttons.push_back(exitbutton);
   layers[1]->addChild(exitbutton);
 
+  buttonssize = buttons.size();
 }
 
 void TitleScreen::MakeBackground()
@@ -69,6 +76,17 @@ void TitleScreen::update(float deltaTime)
 		fpstimer.start();
 	}
 	framecounter++;
+
+	for (int i=0; i<buttonssize; i++) {
+		Button* b = buttons[i];
+    if (b->CheckPressed() == true)
+    {
+      std::cout << "Button got pressed" << std::endl;
+      if (b == buttons[0]) { std::cout << "Going to Game" << std::endl; StartGame(); }
+      if (b == buttons[1]) { std::cout << "Going to Credits" << std::endl; Credits(); }
+      if (b == buttons[2]) { std::cout << "Exiting" << std::endl; Exit(); }
+    }
+	}
 }
 
 void TitleScreen::StartGame()

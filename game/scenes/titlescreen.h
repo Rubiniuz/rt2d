@@ -6,6 +6,7 @@
 #include <rt2d/canvas.h>
 #include <rt2d/vectorx.h>
 #include <rt2d/texture.h>
+#include <rt2d/input.h>
 
 #include "../myscene.h"
 #include "../layer.h"
@@ -31,11 +32,16 @@ public:
 
   static int activescene;
 
+  Input* input;
+
 private:
   Background* background;
   Button* startbutton;
   Button* creditsbutton;
   Button* exitbutton;
+
+  std::vector<Button*> buttons;
+  int buttonssize;
 
   Timer fpstimer;
 };
