@@ -4,6 +4,7 @@
 using namespace std;
 
 #include <rt2d/entity.h>
+#include <rt2d/input.h>
 #include <string>
 #include <iostream>
 
