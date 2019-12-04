@@ -88,18 +88,3 @@ void TitleScreen::update(float deltaTime)
     }
 	}
 }
-
-void TitleScreen::StartGame()
-{
-
-}
-
-void TitleScreen::Credits()
-{
-
-}
-
-void TitleScreen::Exit()
-{
-
-}

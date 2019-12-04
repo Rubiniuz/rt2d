@@ -26,10 +26,6 @@ public:
   void MakeBackground();
   void MakeButtons();
 
-  void StartGame();
-  void Credits();
-  void Exit();
-
   static int activescene;
 
   Input* input;
