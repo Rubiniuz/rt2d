@@ -19,6 +19,8 @@ public:
 
   void UseSprite(string toGet);
 
+  bool CheckPressed();
+
 private:
 
 };
