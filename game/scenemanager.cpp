@@ -31,8 +31,8 @@ void Scenemanager::Init()
 MyScene* Scenemanager::ToRun()
 {
 	scenecounter = currentScene->activescene;
-	if (scenecounter > s-1) { scenecounter = 0; currentScene->activescene = 0; }
-	if (scenecounter < 0) { scenecounter = s-1; currentScene->activescene = s-1; }
+	//if (scenecounter > s-1) { scenecounter = 0; currentScene->activescene = 0; }
+	//if (scenecounter < 0) { scenecounter = s-1; currentScene->activescene = s-1; }
 	currentScene = scenes[scenecounter];
 	return currentScene;
 }
