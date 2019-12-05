@@ -1,24 +1,17 @@
 #include "scenemanager.h"
 
-Scenemanager::Scenemanager() : Entity()
-{
-	std::cout << "Scenemanager Constructor" << std::endl;
-}
+/* Null, because instance will be initialized on demand. */
+Scenemanager* Scenemanager::instance = 0;
+
+Scenemanager::Scenemanager()
+{}
 
 Scenemanager::~Scenemanager()
-{
-	std::cout << "Scenemanager DeConstructor" << std::endl;
-}
-
-void Scenemanager::update(float deltaTime)
-{
-
-}
+{}
 
 void Scenemanager::AddScene(MyScene* toAdd)
 {
 	scenes.push_back(toAdd);
-	this->addChild(toAdd);
 	s = scenes.size();
 }
 void Scenemanager::Init()
@@ -35,4 +28,14 @@ MyScene* Scenemanager::ToRun()
 	//if (scenecounter < 0) { scenecounter = s-1; currentScene->activescene = s-1; }
 	currentScene = scenes[scenecounter];
 	return currentScene;
+}
+
+Scenemanager* Scenemanager::getInstance()
+{
+    if (Scenemanager::instance == 0)
+    {
+        Scenemanager::instance = new Scenemanager();
+    }
+
+    return Scenemanager::instance;
 }

@@ -5,13 +5,13 @@
 #include "myscene.h"
 
 /// @brief The Scenemanager class is the Scene implementation.
-class Scenemanager : public Entity
+class Scenemanager
 {
 public:
-	Scenemanager();
-	~Scenemanager();
 
-	virtual void update(float deltaTime);
+	Scenemanager();
+
+	~Scenemanager();
 
 	std::vector<MyScene*> scenes;
 	MyScene* currentScene;
@@ -25,6 +25,13 @@ public:
 	void AddScene(MyScene* toAdd);
 	//void RemoveScene(int toRemove);
 	//int getVectorPosition(MyScene* toFind);
+
+	static Scenemanager* getInstance();
+
+
+private:
+
+	static Scenemanager* instance;
 
 };
 
