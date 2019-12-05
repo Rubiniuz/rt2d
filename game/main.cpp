@@ -16,7 +16,6 @@
 #include <rt2d/core.h>
 #include "scenemanager.h"
 #include "scenes/titlescreen.h"
-#include "myscene.h"
 
 /// @brief main entry point
 int main( void )
@@ -24,16 +23,14 @@ int main( void )
 	// Core instance
 	Core core;
 
-	Scenemanager scenemanager;
+	Scenemanager::getInstance()->AddScene(new TitleScreen());
 
-	scenemanager.AddScene(new TitleScreen());
-
-	scenemanager.Init();
+	Scenemanager::getInstance()->Init();
 
 	int running = 1;
 	while (running)
 	{
-		MyScene* scene = scenemanager.ToRun();
+		MyScene* scene = Scenemanager::getInstance()->ToRun();
 		core.run(scene); // update and render the current scene
 		core.showFrameRate(5); // show framerate in output every n seconds
 		if (!scene->isRunning()) { running = 0; } // check status of Scene every frame
