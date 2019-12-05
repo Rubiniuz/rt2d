@@ -183,6 +183,8 @@ IF(MAKE_GAME)
     game/scenemanager.h
     game/scenes/titlescreen.cpp
     game/scenes/titlescreen.h
+    game/scenes/game.cpp
+    game/scenes/game.h
     game/ui/button.cpp
     game/ui/button.h
     game/ui/background.cpp
