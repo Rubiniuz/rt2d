@@ -5,7 +5,6 @@
  *
  * @brief description of MyScene behavior.
  */
-
 #ifndef MYSCENE_H
 #define MYSCENE_H
 
@@ -13,6 +12,7 @@
 #include <rt2d/canvas.h>
 #include <rt2d/vectorx.h>
 #include <rt2d/input.h>
+#include <string>
 #include "layer.h"
 
 /// @brief The MyScene class is the Scene implementation.
@@ -20,7 +20,7 @@ class MyScene : public Scene
 {
 public:
 	/// @brief Constructor
-	MyScene();
+	MyScene(std::string name);
 	/// @brief Destructor
 	virtual ~MyScene();
 
@@ -30,6 +30,10 @@ public:
 	virtual void update(float deltaTime);
 
 	static int activescene;
+
+	virtual std::string getMySceneName();
+
+	std::string _myscenename;
 
 protected:
 	unsigned int top_layer;

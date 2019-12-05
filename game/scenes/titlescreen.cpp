@@ -2,9 +2,10 @@
 
 int TitleScreen::activescene = 0;
 
-TitleScreen::TitleScreen() : MyScene()
+TitleScreen::TitleScreen(std::string name) : MyScene("titlescreen")
 {
-  std::cout << "titlescreen constuctor" << std::endl;
+  _myscenename = name;
+  std::cout << "titlescreen constuctor of: " << _myscenename << std::endl;
   fpstimer.start();
 
   //input = new Input();

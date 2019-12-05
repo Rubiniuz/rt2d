@@ -23,7 +23,7 @@ int main( void )
 	// Core instance
 	Core core;
 
-	Scenemanager::getInstance()->AddScene(new TitleScreen());
+	Scenemanager::getInstance()->AddScene(new TitleScreen("titlescreen ."));
 
 	Scenemanager::getInstance()->Init();
 

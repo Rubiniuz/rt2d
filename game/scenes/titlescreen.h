@@ -17,7 +17,7 @@
 class TitleScreen : public MyScene
 {
 public:
-  TitleScreen();
+  TitleScreen(std::string name);
 
   virtual ~TitleScreen();
 

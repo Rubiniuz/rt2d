@@ -2,9 +2,10 @@
 
 int MyScene::activescene = 0;
 
-MyScene::MyScene() : Scene()
+MyScene::MyScene(std::string name) : Scene()
 {
-	std::cout << "myscene constructor" << std::endl;
+	_myscenename = name;
+	std::cout << "myscene constructor of: " << _myscenename << std::endl;
 	fpstimer.start();
 
 	top_layer = 3; // 8 layers (0-7)
@@ -27,6 +28,11 @@ MyScene::~MyScene()
 		layers[i] = nullptr;
 	}
 	layers.clear();
+}
+
+std::string MyScene::getMySceneName()
+{
+	return _myscenename;
 }
 
 void MyScene::update(float deltaTime)
