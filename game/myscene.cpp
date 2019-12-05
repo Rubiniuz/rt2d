@@ -42,8 +42,6 @@ void MyScene::update(float deltaTime)
 	// ###############################################################
 	static int framecounter = 0;
 	if (fpstimer.seconds() > 1.0f) {
-		std::stringstream fpstxt;
-		fpstxt <<  "FPS: " << framecounter;
 		framecounter = 0;
 		fpstimer.start();
 	}
