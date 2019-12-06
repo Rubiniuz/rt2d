@@ -1,5 +1,7 @@
 #include "titlescreen.h"
 
+using namespace std;
+
 int TitleScreen::activescene = 0;
 
 TitleScreen::TitleScreen(std::string name) : MyScene("titlescreen")
@@ -81,8 +83,8 @@ void TitleScreen::update(float deltaTime)
     if (b->CheckPressed())
     {
       std::cout << "Button got pressed!" << std::endl;
-      if (b == buttons[0]) { std::cout << "Going to Game" << std::endl; activescene = 1; }
-      if (b == buttons[1]) { std::cout << "Going to Credits" << std::endl; activescene = 2; }
+      if (b == buttons[0]) { std::cout << "Going to Game" << std::endl; Scenemanager::getInstance()->GoToScene("game"); }
+      if (b == buttons[1]) { std::cout << "Going to Credits" << std::endl; Scenemanager::getInstance()->GoToScene("credits");  }
       if (b == buttons[2]) { std::cout << "Exiting" << std::endl; }
     }
 	}
