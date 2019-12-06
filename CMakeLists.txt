@@ -191,6 +191,8 @@ IF(MAKE_GAME)
     game/ui/background.h
     game/player.cpp
     game/player.h
+    game/enemy.cpp
+    game/enemy.h
 	)
 	target_link_libraries(game
 		${ALL_GRAPHICS_LIBS}
