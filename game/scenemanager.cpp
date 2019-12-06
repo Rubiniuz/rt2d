@@ -31,7 +31,6 @@ MyScene* Scenemanager::ToRun()
 {
 	if (scenetogo != nullptr)
 	{
-		std::cout<< "scenetogo is not nullptr" << std::endl;
 		if (currentScene->getMySceneName() != scenetogo->getMySceneName())
 		{
 			currentScene = scenetogo;
