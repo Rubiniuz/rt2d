@@ -6,6 +6,7 @@ Game::Game(std::string name) : MyScene("game")
 {
   _myscenename = name;
   std::cout << "game constuctor of: " << _myscenename << std::endl;
+  wtq = false;
   fpstimer.start();
 
   //input = new Input();

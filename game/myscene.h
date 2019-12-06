@@ -33,6 +33,8 @@ public:
 
 	virtual std::string getMySceneName();
 
+	bool wtq;
+
 	std::string _myscenename;
 
 protected:

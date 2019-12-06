@@ -34,6 +34,7 @@ int main( void )
 		MyScene* scene = Scenemanager::getInstance()->ToRun();
 		core.run(scene); // update and render the current scene
 		core.showFrameRate(5); // show framerate in output every n seconds
+		if (scene->wtq) { running = 0; }
 		if (!scene->isRunning()) { running = 0; } // check status of Scene every frame
 	}
 
