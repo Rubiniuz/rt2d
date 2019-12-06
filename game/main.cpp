@@ -17,14 +17,15 @@
 #include "scenemanager.h"
 #include "scenes/titlescreen.h"
 
+using namespace std;
+
 /// @brief main entry point
 int main( void )
 {
 	// Core instance
 	Core core;
-
-	Scenemanager::getInstance()->AddScene(new TitleScreen("titlescreen ."));
-
+	
+	Scenemanager::getInstance()->AddScene(new TitleScreen("titlescreen"));
 	Scenemanager::getInstance()->Init();
 
 	int running = 1;
