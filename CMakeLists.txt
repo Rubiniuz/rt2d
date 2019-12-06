@@ -189,6 +189,8 @@ IF(MAKE_GAME)
     game/ui/button.h
     game/ui/background.cpp
     game/ui/background.h
+    game/player.cpp
+    game/player.h
 	)
 	target_link_libraries(game
 		${ALL_GRAPHICS_LIBS}
