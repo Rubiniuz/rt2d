@@ -16,6 +16,7 @@
 #include <rt2d/core.h>
 #include "scenemanager.h"
 #include "scenes/titlescreen.h"
+#include "scenes/game.h"
 
 using namespace std;
 
@@ -24,9 +25,10 @@ int main( void )
 {
 	// Core instance
 	Core core;
-	
+
 	Scenemanager::getInstance()->AddScene(new TitleScreen("titlescreen"));
 	Scenemanager::getInstance()->Init();
+	Scenemanager::getInstance()->AddScene(new Game("game"));
 
 	int running = 1;
 	while (running)
