@@ -15,19 +15,27 @@ public:
 
 	std::vector<MyScene*> scenes;
 	MyScene* currentScene;
-	int s;
-	int scenecounter;
+	std::string currenSceneName;
 
 	MyScene* ToRun();
 
 	void Init();
 
 	void AddScene(MyScene* toAdd);
-	//void RemoveScene(int toRemove);
+	//void RemoveScene(std::string toRemove);
 	//int getVectorPosition(MyScene* toFind);
+
+	std::vector<MyScene*> getScenes();
+
+	void setSceneToGo(MyScene* scene);
 
 	static Scenemanager* getInstance();
 
+	std::vector<std::string> scenenames;
+	std::vector<std::string> getSceneNames();
+	void GoToScene(std::string name);
+
+	MyScene* scenetogo;
 
 private:
 
