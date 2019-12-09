@@ -2,7 +2,7 @@
 
 Player::Player() : Entity()
 {
-  this->addSprite("assets/startbutton.tga");
+  this->addSprite("assets/spaceship.tga");
 }
 
 Player::~Player()

@@ -2,7 +2,7 @@
 
 Enemy::Enemy() : Entity()
 {
-  this->addSprite("assets/startbutton.tga");
+  this->addSprite("assets/enemy.tga");
 }
 
 Enemy::~Enemy()
