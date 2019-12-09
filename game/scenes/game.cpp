@@ -18,7 +18,7 @@ Game::Game(std::string name) : MyScene("game")
 		this->addChild(layer);
     layers.push_back(layer);
 	}
-
+  AddEntities();
   MakeBackground();
 }
 
@@ -31,7 +31,6 @@ Game::~Game()
 		layers[i] = nullptr;
 	}
 	layers.clear();
-  delete input;
 }
 
 void Game::MakeBackground()
@@ -40,6 +39,19 @@ void Game::MakeBackground()
   background->position = Point2(SWIDTH/2, SHEIGHT/2);
   background->scale = Point3(3.0f, 3.0f, 0.0f);
   layers[0]->addChild(background);
+}
+
+void Game::AddEntities()
+{
+  player = new Player();
+  layers[1]->addChild(player);
+  player->position = Point3(SWIDTH/2, SHEIGHT/2, 0);
+  for (int i = 0; i < 5; i++) {
+    Enemy* enemy = new Enemy();
+    enemy->position = Point3((125 * i + 100), 500, 0);
+    enemies.push_back(enemy);
+    layers[1]->addChild(enemies[i]);
+  }
 }
 
 void Game::update(float deltaTime)

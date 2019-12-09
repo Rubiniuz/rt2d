@@ -12,7 +12,8 @@
 #include "../layer.h"
 #include "../ui/button.h"
 #include "../ui/background.h"
-
+#include "../enemy.h"
+#include "../player.h"
 
 class Game : public MyScene
 {
@@ -24,6 +25,7 @@ public:
   virtual void update(float deltaTime);
 
   void MakeBackground();
+  void AddEntities();
 
   static int activescene;
 
@@ -31,7 +33,10 @@ public:
 
 private:
   Background* background;
-
+  std::vector<Enemy*> enemies;
+  Point3 PlayerMovement();
+  Point3 GetPlayerRotation();
+  Player* player;
   Timer fpstimer;
 };
 
