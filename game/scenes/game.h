@@ -14,6 +14,7 @@
 #include "../ui/background.h"
 #include "../enemy.h"
 #include "../player.h"
+#include "world.h"
 
 class Game : public MyScene
 {
@@ -33,6 +34,7 @@ public:
 
 private:
   Background* background;
+  World* world;
   std::vector<Enemy*> enemies;
   Point3 PlayerMovement();
   Point3 GetPlayerRotation();

@@ -15,6 +15,7 @@ Game::Game(std::string name) : MyScene("game")
 
 	for (unsigned int i = 0; i <= top_layer; i++) {
 		Layer* layer = new Layer();
+    layer->Init(1);
 		this->addChild(layer);
     layers.push_back(layer);
 	}
@@ -35,10 +36,13 @@ Game::~Game()
 
 void Game::MakeBackground()
 {
-  background = new Background();
+  /*background = new Background();
   background->position = Point2(SWIDTH/2, SHEIGHT/2);
   background->scale = Point3(3.0f, 3.0f, 0.0f);
   layers[0]->addChild(background);
+  */
+  world = new World();
+  layers[0]->addChild(world);
 }
 
 void Game::AddEntities()
