@@ -1,5 +1,7 @@
 #include "player.h"
 
+using namespace std;
+
 Player::Player() : Entity()
 {
   this->addSprite("assets/spaceship.tga");

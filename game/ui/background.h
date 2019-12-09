@@ -1,8 +1,6 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
-using namespace std;
-
 #include <rt2d/entity.h>
 #include <string>
 #include <iostream>
@@ -16,7 +14,7 @@ public:
 
   virtual void update(float deltaTime);
 
-  void UseSprite(string toGet);
+  void UseSprite(std::string toGet);
 
 private:
 

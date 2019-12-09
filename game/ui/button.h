@@ -1,8 +1,6 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-using namespace std;
-
 #include <rt2d/entity.h>
 #include <rt2d/input.h>
 #include <string>
@@ -17,7 +15,7 @@ public:
 
   virtual void update(float deltaTime);
 
-  void UseSprite(string toGet);
+  void UseSprite(std::string toGet);
 
   bool CheckPressed();
 

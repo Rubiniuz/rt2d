@@ -1,5 +1,7 @@
 #include "enemy.h"
 
+using namespace std;
+
 Enemy::Enemy() : Entity()
 {
   this->addSprite("assets/enemy.tga");
