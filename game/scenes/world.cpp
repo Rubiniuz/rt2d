@@ -3,8 +3,8 @@
 World::World() : Entity()
 {
   std::cout << "World Constructor" << std::endl;
-  gridwidth = 256;
-	gridheight = 256;
+  gridwidth = 64;
+	gridheight = 64;
 	cellwidth = 32;
 	cellheight = 32;
 
@@ -18,7 +18,7 @@ World::World() : Entity()
 	// fill field of tiles
 	field = new Field();
 	//field->addGrid(AUTOGENWHITE, 1, 1, gridwidth, gridheight, cellwidth, cellheight);
-	field->addGrid("assets/worldtiles.tga", 6, 6, gridwidth, gridheight, cellwidth, cellheight);
+	field->addGrid("assets/worldtiles.tga", 8, 8, gridwidth, gridheight, cellwidth, cellheight);
 
 	heightmapsprite = new Sprite();
 	heightmapsprite->setupSpriteTGAPixelBuffer("assets/heightmap64.tga", 0, 2);

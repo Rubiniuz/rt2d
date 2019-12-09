@@ -15,7 +15,7 @@ Game::Game(std::string name) : MyScene("game")
 
 	for (unsigned int i = 0; i <= top_layer; i++) {
 		Layer* layer = new Layer();
-    layer->Init(1);
+    layer->Init(4);
 		this->addChild(layer);
     layers.push_back(layer);
 	}
