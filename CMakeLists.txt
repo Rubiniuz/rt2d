@@ -185,6 +185,10 @@ IF(MAKE_GAME)
     game/scenes/titlescreen.h
     game/scenes/game.cpp
     game/scenes/game.h
+    game/scenes/field.cpp
+    game/scenes/field.h
+    game/scenes/world.cpp
+    game/scenes/world.h
     game/ui/button.cpp
     game/ui/button.h
     game/ui/background.cpp
@@ -193,6 +197,7 @@ IF(MAKE_GAME)
     game/player.h
     game/enemy.cpp
     game/enemy.h
+
 	)
 	target_link_libraries(game
 		${ALL_GRAPHICS_LIBS}
