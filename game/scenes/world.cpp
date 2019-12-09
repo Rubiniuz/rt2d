@@ -8,7 +8,7 @@ World::World() : Entity()
 	cellwidth = 32;
 	cellheight = 32;
 
-	RGBAColor wall       =		RGBAColor(0, 0, 0);
+	RGBAColor wall       =		RGBAColor(255, 255, 255);
 	RGBAColor top        =		RGBAColor(51, 51, 51);
 	RGBAColor high       =	  RGBAColor(102, 102, 102);
 	RGBAColor low        =		RGBAColor(153, 153, 153);
