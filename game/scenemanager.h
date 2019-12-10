@@ -31,6 +31,8 @@ public:
 
 	static Scenemanager* getInstance();
 
+	Camera* getCamera();
+
 	std::vector<std::string> scenenames;
 	std::vector<std::string> getSceneNames();
 	void GoToScene(std::string name);

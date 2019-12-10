@@ -74,3 +74,8 @@ Scenemanager* Scenemanager::getInstance()
   }
   return Scenemanager::instance;
 }
+
+Camera* Scenemanager::getCamera()
+{
+	return currentScene->camera();
+}
