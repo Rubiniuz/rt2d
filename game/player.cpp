@@ -46,6 +46,14 @@ void Player::updateSpaceShip(float deltaTime)
 		polar.angle -= rotspeed * deltaTime; // rotate left
 	}
 
+  float coefficient = 0.5;
+  Vector2 friction = velocity;
+  friction /= -1;
+  friction.normalize();
+  friction *= coefficient;
+
+  velocity += friction;
+
 	this->rotation.z = polar.angle;
 	this->position += velocity * deltaTime;
   Scenemanager::getInstance()->getCamera()->position += velocity * deltaTime;
