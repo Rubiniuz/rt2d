@@ -6,6 +6,8 @@
 #include <string>
 #include <iostream>
 
+#include "scenemanager.h"
+
 class Player : public Entity
 {
 public:

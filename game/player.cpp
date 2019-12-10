@@ -28,12 +28,12 @@ void Player::updateSpaceShip(float deltaTime)
 
 	float rotspeed = 3.14f;
 
-	static Vector2 velocity = Vector2((rand()%100)-50, (rand()%100)-50);
+	static Vector2 velocity = Vector2(0,0);
 	static Polar polar = Polar((rand()%360) * DEG_TO_RAD, 400.0f);
 
 	if (input()->getKey( KeyCode::W )) {
 		this->UseSprite("assets/spaceship.tga");
-		velocity += polar.cartesian() * deltaTime; // thrust
+		velocity += polar.cartesian() * deltaTime / 2; // thrust
 	}
   if (input()->getKey( KeyCode::S )) {
 		this->UseSprite("assets/spaceship.tga");
@@ -48,4 +48,5 @@ void Player::updateSpaceShip(float deltaTime)
 
 	this->rotation.z = polar.angle;
 	this->position += velocity * deltaTime;
+  Scenemanager::getInstance()->getCamera()->position += velocity * deltaTime;
 }
