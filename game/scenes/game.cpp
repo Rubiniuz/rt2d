@@ -65,5 +65,5 @@ void Game::update(float deltaTime)
 	}
 	framecounter++;
 
-  Cameramove(deltaTime);
+  camera()->position = player.position;
 }
