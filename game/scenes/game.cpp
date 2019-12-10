@@ -64,4 +64,7 @@ void Game::update(float deltaTime)
 		fpstimer.start();
 	}
 	framecounter++;
+  if (Singleton<Input>::instance()->getKey( KeyCode::Escape )) {
+    this->stop();
+  }
 }

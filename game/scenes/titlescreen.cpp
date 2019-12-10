@@ -89,4 +89,7 @@ void TitleScreen::update(float deltaTime)
       if (b == buttons[2]) { std::cout << "Exiting" << std::endl; wtq = true;}
     }
 	}
+  if (Singleton<Input>::instance()->getKey( KeyCode::Escape )) {
+    this->stop();
+  }
 }
