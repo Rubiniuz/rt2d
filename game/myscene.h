@@ -29,6 +29,8 @@ public:
 	/// @return void
 	virtual void update(float deltaTime);
 
+	virtual void Cameramove(float deltaTime);
+
 	static int activescene;
 
 	virtual std::string getMySceneName();

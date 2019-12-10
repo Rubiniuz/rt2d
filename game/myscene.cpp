@@ -46,4 +46,35 @@ void MyScene::update(float deltaTime)
 		fpstimer.start();
 	}
 	framecounter++;
+	Cameramove(deltaTime);
+}
+
+void MyScene::Cameramove(float deltaTime)
+{
+	// ###############################################################
+	// Move Camera (Arrow up, down, left, right)
+	// ###############################################################
+	float speed = 600.0f; // 600 units / second
+
+	// Right and Down vector
+	Point2 right = Point2(1, 0);
+	Point2 up = Point2(0, 1);
+	// Direction
+	Vector2 direction = Vector2(0,0);
+
+	if (input()->getKey(KeyCode::Up)) {
+		direction -= up;
+	}
+	if (input()->getKey(KeyCode::Down)) {
+		direction += up;
+	}
+	if (input()->getKey(KeyCode::Right)) {
+		direction += right;
+	}
+	if (input()->getKey(KeyCode::Left)) {
+		direction -= right;
+	}
+	direction.normalize();
+	direction *= deltaTime * speed;
+	camera()->position += direction;
 }
