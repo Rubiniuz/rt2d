@@ -17,6 +17,11 @@ public:
 
   void UseSprite(std::string toGet);
 
+  void updateSpaceShip(float deltaTime);
+
+  static Vector2 velocity;
+  static Polar polar;
+
 private:
 
 };
