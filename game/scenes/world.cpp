@@ -9,10 +9,10 @@ World::World() : Entity()
 	cellheight = 32;
 
 	RGBAColor wall       =		RGBAColor(255, 255, 255);
-	RGBAColor top        =		RGBAColor(51, 51, 51);
-	RGBAColor high       =	  RGBAColor(102, 102, 102);
-	RGBAColor low        =		RGBAColor(153, 153, 153);
-	RGBAColor bottom     =		RGBAColor(204, 204, 204);
+	RGBAColor top        =		RGBAColor(255, 255, 255);
+	RGBAColor high       =	  RGBAColor(255, 255, 255);
+	RGBAColor low        =		RGBAColor(255, 255, 255);
+	RGBAColor bottom     =		RGBAColor(255, 255, 255);
 	RGBAColor background =		RGBAColor(255, 255, 255);
 
 	// fill field of tiles
