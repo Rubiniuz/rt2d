@@ -64,7 +64,4 @@ void Game::update(float deltaTime)
 		fpstimer.start();
 	}
 	framecounter++;
-
-  camera()->position = player.position;
-  
 }
