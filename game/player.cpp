@@ -54,6 +54,16 @@ void Player::updateSpaceShip(float deltaTime)
 
   velocity += friction;
 
+  if (this->position.x < 32){ this->position.x = 32; }
+  if (this->position.x > 1984){ this->position.x = 1984; }
+  if (this->position.y < 32){ this->position.y = 32; }
+  if (this->position.y > 1984){ this->position.y = 1984; }
+
+  if (Scenemanager::getInstance()->getCamera()->position.x < 32){ Scenemanager::getInstance()->getCamera()->position.x = 32; }
+  if (Scenemanager::getInstance()->getCamera()->position.x > 1984){ Scenemanager::getInstance()->getCamera()->position.x = 1984; }
+  if (Scenemanager::getInstance()->getCamera()->position.y < 32){ Scenemanager::getInstance()->getCamera()->position.y = 32; }
+  if (Scenemanager::getInstance()->getCamera()->position.y > 1984){ Scenemanager::getInstance()->getCamera()->position.y = 1984; }
+
 	this->rotation.z = polar.angle;
 	this->position += velocity * deltaTime;
   Scenemanager::getInstance()->getCamera()->position += velocity * deltaTime;
