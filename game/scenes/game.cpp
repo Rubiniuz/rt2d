@@ -36,11 +36,6 @@ Game::~Game()
 
 void Game::MakeBackground()
 {
-  /*background = new Background();
-  background->position = Point2(SWIDTH/2, SHEIGHT/2);
-  background->scale = Point3(3.0f, 3.0f, 0.0f);
-  layers[0]->addChild(background);
-  */
   world = new World();
   layers[0]->addChild(world);
 }
@@ -69,4 +64,6 @@ void Game::update(float deltaTime)
 		fpstimer.start();
 	}
 	framecounter++;
+
+  Cameramove(deltaTime);
 }
