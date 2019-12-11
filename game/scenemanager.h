@@ -8,9 +8,6 @@
 class Scenemanager
 {
 public:
-
-	Scenemanager();
-
 	~Scenemanager();
 
 	std::vector<MyScene*> scenes;
@@ -44,6 +41,7 @@ public:
 private:
 
 	static Scenemanager* instance;
+	Scenemanager();
 
 };
 
