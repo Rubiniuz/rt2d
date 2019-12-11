@@ -2,7 +2,7 @@
 
 Bullet::Bullet() : Entity()
 {
-  this->addSpriteSheet("assets/bulletsheet.tga", 2, 2);
+  this->addSpriteSheet("assets/bulletsheet.tga", 4, 4);
   this->sprite()->frame(0);
   t.start();
   life.start();
