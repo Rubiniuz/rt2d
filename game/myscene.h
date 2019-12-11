@@ -35,13 +35,14 @@ public:
 
 	virtual std::string getMySceneName();
 
+	std::vector<Layer*> layers;
+
 	bool wtq;
 
 	std::string _myscenename;
 
 protected:
 	unsigned int top_layer;
-	std::vector<Layer*> layers;
 	void moveCamera(float deltaTime);
 
 private:
