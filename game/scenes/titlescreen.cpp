@@ -38,19 +38,19 @@ TitleScreen::~TitleScreen()
 }
 void TitleScreen::MakeButtons()
 {
-  startbutton = new Button();
+  startbutton = new Button("assets/startbutton.tga");
   startbutton->position = Point2(SWIDTH/2, 400);
   startbutton->scale = Point3(3.0f, 3.0f, 0.0f);
   buttons.push_back(startbutton);
   layers[1]->addChild(startbutton);
 
-  creditsbutton = new Button();
+  creditsbutton = new Button("assets/creditsbutton.tga");
   creditsbutton->position = Point2(SWIDTH/2, 500);
   creditsbutton->scale = Point3(3.0f, 3.0f, 0.0f);
   buttons.push_back(creditsbutton);
   layers[1]->addChild(creditsbutton);
 
-  exitbutton = new Button();
+  exitbutton = new Button("assets/exitbutton.tga");
   exitbutton->position = Point2(SWIDTH/2, 600);
   exitbutton->scale = Point3(3.0f, 3.0f, 0.0f);
   buttons.push_back(exitbutton);

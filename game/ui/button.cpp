@@ -2,9 +2,9 @@
 
 using namespace std;
 
-Button::Button() : Entity()
+Button::Button(string sprite) : Entity()
 {
-  this->addSprite("assets/startbutton.tga");
+  this->addSprite(sprite);
 }
 
 Button::~Button()

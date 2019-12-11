@@ -9,7 +9,7 @@
 class Button : public Entity
 {
 public:
-  Button();
+  Button(std::string sprite);
 
   virtual ~Button();
 
