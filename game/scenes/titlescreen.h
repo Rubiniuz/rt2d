@@ -34,6 +34,7 @@ public:
 
 private:
   Background* background;
+  Background* gamename;
   Button* startbutton;
   Button* creditsbutton;
   Button* exitbutton;

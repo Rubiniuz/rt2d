@@ -65,6 +65,11 @@ void TitleScreen::MakeBackground()
   background->position = Point2(SWIDTH/2, SHEIGHT/2);
   background->scale = Point3(3.0f, 3.0f, 0.0f);
   layers[0]->addChild(background);
+  gamename = new Background();
+  gamename->position = Point2(SWIDTH/2, SHEIGHT/3);
+  gamename->scale = Point3(1.5f, 1.5f, 0.0f);
+  gamename->UseSprite("assets/titlename.tga");
+  layers[0]->addChild(gamename);
 }
 
 void TitleScreen::update(float deltaTime)
