@@ -33,6 +33,8 @@ public:
 
 	Camera* getCamera();
 
+	MyScene* getCurrentScene();
+
 	std::vector<std::string> scenenames;
 	std::vector<std::string> getSceneNames();
 	void GoToScene(std::string name);
