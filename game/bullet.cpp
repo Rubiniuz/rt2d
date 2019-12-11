@@ -2,7 +2,8 @@
 
 Bullet::Bullet() : Entity()
 {
-  this->addSprite("assets/bulletsheet.tga");
+  this->addSpriteSheet("assets/bulletsheet.tga", 2, 2);
+  this->sprite()->frame(0);
   t.start();
   life.start();
 }
@@ -19,7 +20,7 @@ void Bullet::update(float deltaTime)
   if (f > 4) { f = 0; }
 
   this->sprite()->frame(f);
-  if (t.seconds() > 0.25f) {
+  if (t.seconds() > 0.05f) {
     f++;
     t.start();
   }
