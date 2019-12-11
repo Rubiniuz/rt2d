@@ -9,7 +9,7 @@ World::World() : Entity()
 	cellheight = 32;
 
 	RGBAColor wall       =		RGBAColor(255, 255, 255);
-	RGBAColor top        =		RGBAColor(255, 255, 255);
+	RGBAColor enemyspawn =		RGBAColor(255, 255, 255);
 	RGBAColor high       =	  RGBAColor(255, 255, 255);
 	RGBAColor low        =		RGBAColor(255, 255, 255);
 	RGBAColor bottom     =		RGBAColor(255, 255, 255);
@@ -38,7 +38,7 @@ World::World() : Entity()
       if (tint == 200) { tile->color = bottom; }
       if (tint == 150) { tile->color = low; }
       if (tint == 100) { tile->color = high; }
-			if (tint == 50) { tile->color = top; }
+			if (tint == 50) { tile->color = enemyspawn; }
 			if (tint == 0) { tile->color = wall; }
 
       if (tint == 255) { tile->frame(0); }
