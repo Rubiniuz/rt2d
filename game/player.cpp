@@ -5,6 +5,10 @@ using namespace std;
 Player::Player() : Entity()
 {
   this->addSprite("assets/spaceship.tga");
+  velocity = Vector2(0,0);
+	polar = Polar((rand()%360) * DEG_TO_RAD, 400.0f);
+  rotspeed = 3.14f;
+  bulletSpeed = 500.0f;
 }
 
 Player::~Player()
@@ -15,6 +19,8 @@ Player::~Player()
 void Player::update(float deltaTime)
 {
   updateSpaceShip(deltaTime);
+  ShootBullets();
+  CheckBullets();
 }
 
 void Player::UseSprite(string toGet)
@@ -25,11 +31,6 @@ void Player::UseSprite(string toGet)
 void Player::updateSpaceShip(float deltaTime)
 {
 	this->UseSprite("assets/spaceship.tga");
-
-	float rotspeed = 3.14f;
-
-	static Vector2 velocity = Vector2(0,0);
-	static Polar polar = Polar((rand()%360) * DEG_TO_RAD, 400.0f);
 
 	if (input()->getKey( KeyCode::W )) {
 		this->UseSprite("assets/spaceship.tga");
@@ -64,7 +65,32 @@ void Player::updateSpaceShip(float deltaTime)
   if (Scenemanager::getInstance()->getCamera()->position.y < 32){ Scenemanager::getInstance()->getCamera()->position.y = 32; }
   if (Scenemanager::getInstance()->getCamera()->position.y > 1984){ Scenemanager::getInstance()->getCamera()->position.y = 1984; }
 
+  velocity.limit(400);
+
 	this->rotation.z = polar.angle;
 	this->position += velocity * deltaTime;
   Scenemanager::getInstance()->getCamera()->position += velocity * deltaTime;
+}
+
+void Player::ShootBullets()
+{
+  if (input()->getKeyDown( KeyCode::Space ))
+  {
+    Bullet* tempBullet = new Bullet();
+    tempBullet->position = this->position;
+    tempBullet->rotation = this->rotation;
+    tempBullet->velocity = Vector2(cos(this->rotation.z),sin(this->rotation.z));
+    tempBullet->velocity *= bulletSpeed * 2;
+    this->playerBullets.push_back(tempBullet);
+    Scenemanager::getInstance()->getCurrentScene()->layers[1]->addChild(tempBullet);
+  }
+}
+
+void Player::CheckBullets()
+{
+  for (int i = 0; i < this->playerBullets.size(); i++)
+  {
+    Bullet* tmp = this->playerBullets[i];
+    if ( tmp->life.seconds() > 5.0f) { playerBullets.erase(playerBullets.begin()+i); Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(tmp); }
+  }
 }

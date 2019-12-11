@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "scenemanager.h"
+#include "bullet.h"
 
 class Player : public Entity
 {
@@ -21,8 +22,15 @@ public:
 
   void updateSpaceShip(float deltaTime);
 
-  static Vector2 velocity;
-  static Polar polar;
+  void ShootBullets();
+  void CheckBullets();
+
+  Vector2 velocity;
+  Polar polar;
+  float rotspeed;
+  float bulletSpeed;
+
+  std::vector<Bullet*> playerBullets;
 
 private:
 
