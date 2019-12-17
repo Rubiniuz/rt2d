@@ -33,6 +33,8 @@ public:
 
 	static int activescene;
 
+  bool initialized;
+
 	virtual std::string getMySceneName();
 
 	std::vector<Layer*> layers;

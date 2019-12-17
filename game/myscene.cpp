@@ -12,10 +12,11 @@ MyScene::MyScene(std::string name) : Scene()
 
 	for (unsigned int i = 0; i <= top_layer; i++) {
 		Layer* layer = new Layer();
-    layer->Init(8);
+    layer->Init(1);
 		layers.push_back(layer);
 		this->addChild(layer);
 	}
+	initialized = true;
 }
 
 

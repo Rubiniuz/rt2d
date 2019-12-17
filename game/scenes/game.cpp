@@ -21,6 +21,7 @@ Game::Game(std::string name) : MyScene("game")
 	}
   AddEntities();
   MakeBackground();
+  initialized = true;
 }
 
 Game::~Game()
