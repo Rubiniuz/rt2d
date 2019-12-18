@@ -6,7 +6,6 @@ using namespace std;
 Enemy::Enemy() : Entity()
 {
   this->addSprite("assets/enemy.tga");
-  TGA2PixelSprite();
 }
 
 Enemy::~Enemy()
@@ -54,9 +53,9 @@ void Enemy::TGA2PixelSprite()
   std::cout << "decltype(thisparententity) is " << type_name<decltype(thisparententity)>() << std::endl;
   std::cout << "decltype(thisparent) is " << type_name<decltype(thisparent)>() << std::endl;
 
-  //thisparent->canvas->drawSprite(mainsprite);
+  thisparent->canvas->drawSprite(mainsprite);
 
   mainsprite.position = Point2i(100,100);
-  Scenemanager::getInstance()->getCurrentScene()->layers[2]->canvas->drawSprite(mainsprite);
+  //Scenemanager::getInstance()->getCurrentScene()->layers[2]->canvas->drawSprite(mainsprite);
 
 }
