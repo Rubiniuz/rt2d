@@ -15,7 +15,7 @@ Game::Game(std::string name) : MyScene("game")
 
 	for (unsigned int i = 0; i <= top_layer; i++) {
 		Layer* layer = new Layer();
-    layer->Init(4);
+    layer->Init(1);
 		this->addChild(layer);
     layers.push_back(layer);
 	}
@@ -48,9 +48,9 @@ void Game::AddEntities()
   player->position = Point3(SWIDTH/2, SHEIGHT/2, 0);
   for (int i = 0; i < 5; i++) {
     Enemy* enemy = new Enemy();
-    enemy->position = Point3((125 * i + 100), 500, 0);
+    enemy->position = Point3((125 * i + 10), 50, 0);
     enemies.push_back(enemy);
-    layers[1]->addChild(enemies[i]);
+    layers[1]->addChild(enemy);
   }
 }
 
