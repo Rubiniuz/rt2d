@@ -88,7 +88,7 @@ void Player::ShootBullets()
 
 void Player::CheckBullets()
 {
-  for (int i = 0; i < this->playerBullets.size(); i++)
+  for (int i = this->playerBullets.size(); i > 0; i--)
   {
     Bullet* tmp = this->playerBullets[i];
     if ( tmp->life.seconds() > 5.0f) { playerBullets.erase(playerBullets.begin()+i); Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(tmp); }
