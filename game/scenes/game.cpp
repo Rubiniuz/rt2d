@@ -46,12 +46,13 @@ void Game::AddEntities()
   player = new Player();
   layers[1]->addChild(player);
   player->position = Point3(SWIDTH/2, SHEIGHT/2, 0);
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 1; i++) {
     Enemy* enemy = new Enemy();
     enemy->position = Point3((125 * i + 10), 50, 0);
     enemies.push_back(enemy);
     layers[1]->addChild(enemy);
-    enemy->TGA2PixelSprite();
+    enemy->TGA2Grid("assets/enemytiles.tga","assets/enemycolormap.tga");
+    //enemy->TGA2PixelSprite();
   }
 }
 
