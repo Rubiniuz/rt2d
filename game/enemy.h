@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream>
 
+#include "scenes/field.h"
 #include "scenemanager.h"
 
 class Enemy : public Entity
@@ -22,14 +23,25 @@ public:
   void UseSprite(std::string toGet);
 
   void TGA2PixelSprite();
+  void TGA2Grid(std::string tiles, std::string tga);
 
-  char playerSprite;
+  char enemySprite;
 
   PixelSprite mainsprite;
 
   Canvas* can;
 
 private:
+  // a field of tiles
+  Field* field;
+  Sprite* heightmapsprite;
+
+  std::vector<char> cv;
+
+  int gridwidth;
+  int gridheight;
+  int cellwidth;
+  int cellheight;
 
 };
 
