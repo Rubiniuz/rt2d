@@ -5,7 +5,8 @@ using namespace std;
 
 Enemy::Enemy() : Entity()
 {
-  this->addSprite("assets/enemy.tga");
+  //this->addSprite("assets/enemy.tga");
+  TGA2Grid("assets/enemytiles.tga","assets/enemycolormap.tga");
 }
 
 Enemy::~Enemy()
@@ -30,128 +31,70 @@ void Enemy::TGA2Grid(std::string tiles, std::string tga)
   std::cout << "TGA to grid" << std::endl;
   gridwidth = 3;
 	gridheight = 3;
-	cellwidth = 8;
-	cellheight = 8;
+	cellwidth = 16;
+	cellheight = 16;
 
-	RGBAColor White       =		RGBAColor(255, 255, 255);
+	RGBAColor wall       =		RGBAColor(255, 255, 255);
 
-	// fill field of tiles
-	field = new Field();
-	//field->addGrid(AUTOGENWHITE, 1, 1, gridwidth, gridheight, cellwidth, cellheight);
-	field->addGrid("assets/enemytiles.tga", 4, 4, gridwidth, gridheight, cellwidth, cellheight);
+  // fill field of tiles
+  field = new Field();
+  //field->addGrid(AUTOGENWHITE, 1, 1, gridwidth, gridheight, cellwidth, cellheight);
+  field->addGrid("assets/enemies_tiles.tga", 8, 8, gridwidth, gridheight, cellwidth, cellheight);
 
-	heightmapsprite = new Sprite();
-	heightmapsprite->setupSpriteTGAPixelBuffer("assets/enemycolormap.tga", 0, 2);
-  std::cout << "sprite set up" << std::endl;
-	PixelBuffer* heightmap = heightmapsprite->texture()->pixels();
-  std::cout << "pixelbuffer set up" << std::endl;
-	int w = heightmap->width;
-	int h = heightmap->height;
+  heightmapsprite = new Sprite();
+  heightmapsprite->setupSpriteTGAPixelBuffer("assets/newmap.tga", 0, 2);
+  PixelBuffer* heightmap = heightmapsprite->texture()->pixels();
+  int w = heightmap->width;
+  int h = heightmap->height;
   int counter = 0;
   int tcounter = 0;
 
-  std::cout << "start colormap checking" << std::endl;
-	for (int x = 0; x < w; x++) {
-		for (int y = 0; y < h; y++) {
-			Sprite* tile = field->spritebatch()[tcounter];
-			char tintA = 0; // alpha pixel
-      char tintR = 0; // red pixel
-      char tintG = 0; // green pixel
-      char tintB = 0; // blue pixel
+  for (int x = 0; x < w; x++) {
+    for (int y = 0; y < h; y++) {
+      Sprite* tile = field->spritebatch()[tcounter];
+      unsigned char tint = heightmap->data[counter+3]; // alpha pixel
+      unsigned char tintR = heightmap->data[counter]; // alpha pixel
+      unsigned char tintG = heightmap->data[counter+1]; // alpha pixel
+      unsigned char tintB = heightmap->data[counter+2]; // alpha pixel
 
-      std::cout << "finished setting up RGBA Values" << std::endl;
+      std::cout << "X=========================================X" << std::endl;
+      std::cout << "| * " << "Tile Number: " << tcounter << std::endl;
+      std::cout << "| * " << "Alpha: " << (int)tint << std::endl;
+      std::cout << "| * " <<  "Red: " << (int)tintR << std::endl;
+      std::cout << "| * " <<  "Green: " << (int)tintG << std::endl;
+      std::cout << "| * " <<  "Blue: " << (int)tintB << std::endl;
+      std::cout << "X=========================================X" << std::endl;
+      std::cout << " " << std::endl;
 
-      tintA = heightmap->data[counter+3]; // alpha pixel
-      tintR = heightmap->data[counter]; // red pixel
-      tintG = heightmap->data[counter+1]; // green pixel
-      tintB = heightmap->data[counter+2]; // blue pixel
+      tile->color = wall;
 
-      std::cout << "gave RGBA a value" << std::endl;
+      if (tint == 0) { tile->color = wall; } // empty
+      if (tint == 0) { tile->frame(0); } // empty
 
-      cv = std::vector<char>{ 0, 0, 0, 0 };
+      if (tint == 255 && tintR == 255 && tintG == 0 && tintB == 0 ) { tile->frame(4); } // pure red
+      if (tint == 255 && tintR == 255 && tintG == 51 && tintB == 51 ) { tile->frame(3); } // nearly pure red
+      if (tint == 255 && tintR == 255 && tintG == 102 && tintB == 102 ) { tile->frame(5); } // medium red
+      if (tint == 255 && tintR == 255 && tintG == 153 && tintB == 153 ) { tile->frame(0); } // low red
+      if (tint == 255 && tintR == 255 && tintG == 204 && tintB == 204 ) { tile->frame(0); } // lowest red
 
-      std::cout << "made empty vector array" << std::endl;
+      if (tint == 255 && tintR == 0 && tintG == 255 && tintB == 0 ) { tile->frame(12); } // pure green
+      if (tint == 255 && tintR == 51 && tintG == 255 && tintB == 51 ) { tile->frame(11); } // nearly pure green
+      if (tint == 255 && tintR == 102 && tintG == 255 && tintB == 102 ) { tile->frame(13); } // medium green
+      if (tint == 255 && tintR == 153 && tintG == 255 && tintB == 153 ) { tile->frame(0); } // low green
+      if (tint == 255 && tintR == 204 && tintG == 255 && tintB == 204 ) { tile->frame(0); } // lowest green
 
-      cv[0] = tintA;
-      cv[1] = tintR;
-      cv[2] = tintG;
-      cv[3] = tintB;
-
-      std::cout << "RGBA values put into a vector array" << std::endl;
-      std::cout << "ARGB values: " << cv[0] << " , " << cv[1] << " , "  << cv[2] << " , "  << cv[3] << std::endl;
-      /*
-      if (cv[1] != 0)
-      {
-        if (cv[0] == 0) { tile->color = White; } // empty
-        if (cv[0] == 0) { tile->frame(0); } // empty
-        if (cv[0] == 51) { tile->color = White; } // body
-        if (cv[0] == 51) { tile->frame(0); } // body
-        if (cv[0] == 102) { tile->color = White; } // thruster
-        if (cv[0] == 102) { tile->frame(0); } // thruster
-        if (cv[0] == 153) { tile->color = White; } // leftwing
-        if (cv[0] == 153) { tile->frame(0); } // border
-        if (cv[0] == 153) { tile->color = White; } // leftwing
-        if (cv[0] == 153) { tile->frame(10); } // border
-        if (cv[0] == 255) { tile->color = White; } // leftwing
-        if (cv[0] == 255) { tile->frame(9); } // border
-        std::cout << "Checked red value" << std::endl;
-      }
-      else if (cv[2] != 0)
-      {
-        if (cv[2] == 0) { tile->color = White; } // empty
-        if (cv[2] == 0) { tile->frame(0); } // empty
-        if (cv[2] == 51) { tile->color = White; } // body
-        if (cv[2] == 51) { tile->frame(0); } // body
-        if (cv[2] == 102) { tile->color = White; } // thruster
-        if (cv[2] == 102) { tile->frame(0); } // thruster
-        if (cv[2] == 153) { tile->color = White; } // leftwing
-        if (cv[2] == 153) { tile->frame(0); } // border
-        if (cv[2] == 204) { tile->color = White; } // leftwing
-        if (cv[2] == 204) { tile->frame(3); } // border
-        if (cv[2] == 255) { tile->color = White; } // leftwing
-        if (cv[2] == 255) { tile->frame(2); } // border
-        std::cout << "Checked green value" << std::endl;
-      }
-      else if (cv[3] != 0)
-      {
-        if (cv[3] == 0) { tile->color = White; } // empty
-        if (cv[3] == 0) { tile->frame(0); } // empty
-        if (cv[3] == 51) { tile->color = White; } // body
-        if (cv[3] == 51) { tile->frame(1); } // body
-        if (cv[3] == 102) { tile->color = White; } // thruster
-        if (cv[3] == 102) { tile->frame(2); } // thruster
-        if (cv[3] == 153) { tile->color = White; } // leftwing
-        if (cv[3] == 153) { tile->frame(3); } // border
-        if (cv[3] == 204) { tile->color = White; } // leftwing
-        if (cv[3] == 204) { tile->frame(4); } // border
-        if (cv[3] == 255) { tile->color = White; } // leftwing
-        if (cv[3] == 255) { tile->frame(5); } // border
-        std::cout << "Checked blue value" << std::endl;
-      }*/
-      //else
-      //{
-        if (cv[0] == 0) { tile->color = White; } // empty
-        if (cv[0] == 0) { tile->frame(0); } // empty
-        if (cv[0] == 51) { tile->color = White; } // body
-        if (cv[0] == 51) { tile->frame(0); } // body
-        if (cv[0] == 102) { tile->color = White; } // thruster
-        if (cv[0] == 102) { tile->frame(0); } // thruster
-        if (cv[0] == 153) { tile->color = White; } // leftwing
-        if (cv[0] == 153) { tile->frame(6); } // border
-        if (cv[0] == 204) { tile->color = White; } // leftwing
-        if (cv[0] == 204) { tile->frame(4); } // border
-        if (cv[0] == 255) { tile->color = White; } // leftwing
-        if (cv[0] == 255) { tile->frame(5); } // border
-        std::cout << "Checked alpha value" << std::endl;
-      //}
+      if (tint == 255 && tintR == 0 && tintG == 0 && tintB == 255 ) { tile->frame(20); } // pure blue
+      if (tint == 255 && tintR == 51 && tintG == 51 && tintB == 255 ) { tile->frame(19); } // nearly pure blue
+      if (tint == 255 && tintR == 102 && tintG == 102 && tintB == 255 ) { tile->frame(21); } // medium blue
+      if (tint == 255 && tintR == 153 && tintG == 153 && tintB == 255 ) { tile->frame(0); } // low blue
+      if (tint == 255 && tintR == 204 && tintG == 204 && tintB == 255 ) { tile->frame(0); } // lowest blue
 
       counter += heightmap->bitdepth;
-			tcounter++;
-
-      std::cout << "increase counters" << std::endl;
-		}
-	}
+      tcounter++;
+    }
+  }
 	// add field_container to Enemy
+  field->position = this->position;
 	this->addChild(field);
   std::cout << "added field as child of this enemy" << std::endl;
 }
