@@ -24,6 +24,7 @@ public:
 
   void TGA2PixelSprite();
   void TGA2Grid(std::string tiles, std::string tga);
+  void Master2Grid();
 
   char enemySprite;
 
