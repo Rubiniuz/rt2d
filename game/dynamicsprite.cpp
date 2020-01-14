@@ -3,7 +3,7 @@
 
 DynamicSprite::DynamicSprite() : Entity()
 {
-	this->init(16,16,4);
+	
 }
 
 DynamicSprite::DynamicSprite(int width, int height, int pixelsize)	: Entity()
