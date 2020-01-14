@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "scenemanager.h"
+#include "dynamicsprite.h"
 
 class Enemy : public Entity
 {
