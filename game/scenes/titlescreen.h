@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <rt2d/timer.h>
-#include <rt2d/canvas.h>
 #include <rt2d/vectorx.h>
 #include <rt2d/texture.h>
 #include <rt2d/input.h>

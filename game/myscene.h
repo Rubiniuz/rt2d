@@ -9,7 +9,6 @@
 #define MYSCENE_H
 
 #include <rt2d/scene.h>
-#include <rt2d/canvas.h>
 #include <rt2d/vectorx.h>
 #include <rt2d/input.h>
 #include <string>

@@ -14,9 +14,3 @@ void Layer::update(float deltaTime)
 {
 
 }
-
-void Layer::Init(int bitsize)
-{
-  canvas = new Canvas(bitsize);
-  this->addChild(canvas);
-}
