@@ -5,9 +5,7 @@ using namespace std;
 
 Enemy::Enemy() : Entity()
 {
-  //this->addSprite("assets/enemy.tga");
-  //TGA2Grid("assets/enemytiles.tga","assets/enemycolormap.tga");
-  Master2Grid();
+  
 }
 
 Enemy::~Enemy()
@@ -19,7 +17,9 @@ Enemy::~Enemy()
 
 void Enemy::update(float deltaTime)
 {
-
+  if (input()->getKeyUp( KeyCode::R )) {
+		this->DestroyPart(4);
+	}
 }
 
 void Enemy::UseSprite(string toGet)
@@ -27,7 +27,7 @@ void Enemy::UseSprite(string toGet)
   this->addSprite(toGet);
 }
 
-void Enemy::Master2Grid()
+void Enemy::Master2Grid(std::vector<int> removedparts)
 {
   std::cout << "master to grid" << std::endl;
   gridwidth = 6;
@@ -36,6 +36,7 @@ void Enemy::Master2Grid()
 	cellheight = 16;
 
 	RGBAColor wall       =		RGBAColor(255, 255, 255);
+  RGBAColor empty      =		RGBAColor(0, 0, 0);
 
   // fill field of tiles
   field = new Field();
@@ -67,73 +68,89 @@ void Enemy::Master2Grid()
       std::cout << "X=========================================X" << std::endl;
       std::cout << " " << std::endl;
 
-      tile->color = wall;
+      if (destroyedparts.size() != 0)
+      {
+        for (int z = 0; z < destroyedparts.size(); z++) {
+          std::cout << "the value of destroyedparts: " << z << "is value: " << destroyedparts[z] << std::endl;
+          if (tcounter == destroyedparts[z])
+          {
+            tile->color = empty;
+            tile->frame(0);
+          }
+        }
+      }
 
-      if (tint == 0) { tile->frame(0); } // empty
-      if (tint == 255 && tintR == 255 && tintG == 255 && tintB == 255) { tile->frame(0); }
+      else
+      {
 
-      if (tint == 255 && tintR == 255 && tintG == 230 && tintB == 230) { tile->frame(2); }
-      if (tint == 255 && tintR == 255 && tintG == 204 && tintB == 204) { tile->frame(3); }
-      if (tint == 255 && tintR == 255 && tintG == 180 && tintB == 180) { tile->frame(4); }
-      if (tint == 255 && tintR == 255 && tintG == 153 && tintB == 153) { tile->frame(5); }
-      if (tint == 255 && tintR == 255 && tintG == 130 && tintB == 130) { tile->frame(6); }
-      if (tint == 255 && tintR == 255 && tintG == 102 && tintB == 102) { tile->frame(7); }
-      if (tint == 255 && tintR == 255 && tintG == 80 && tintB == 80)   { tile->frame(8); }
-      if (tint == 255 && tintR == 255 && tintG == 51 && tintB == 51)   { tile->frame(9); }
-      if (tint == 255 && tintR == 255 && tintG == 30 && tintB == 30)   { tile->frame(10); }
+        tile->color = wall;
 
-      if (tint == 255 && tintR == 255 && tintG == 0 && tintB == 0)   { tile->frame(1); }
-      if (tintR == 255 && tint == 225) { tile->frame(2); }
-      if (tintR == 255 && tint == 204) { tile->frame(3); }
-      if (tintR == 255 && tint == 175) { tile->frame(4); }
-      if (tintR == 255 && tint == 153) { tile->frame(5); }
-      if (tintR == 255 && tint == 125) { tile->frame(6); }
-      if (tintR == 255 && tint == 102) { tile->frame(7); }
-      if (tintR == 255 && tint == 75) { tile->frame(8); }
-      if (tintR == 255 && tint == 51) { tile->frame(9); }
-      if (tintR == 255 && tint == 25) { tile->frame(10); }
+        if (tint == 0) { tile->frame(0); } // empty
+        if (tint == 255 && tintR == 255 && tintG == 255 && tintB == 255) { tile->frame(0); }
 
-      if (tint == 255 && tintR == 230 && tintG == 255 && tintB == 230) { tile->frame(0); }
-      if (tint == 255 && tintR == 204 && tintG == 255 && tintB == 204) { tile->frame(0); }
-      if (tint == 255 && tintR == 180 && tintG == 255 && tintB == 180) { tile->frame(0); }
-      if (tint == 255 && tintR == 153 && tintG == 255 && tintB == 153) { tile->frame(0); }
-      if (tint == 255 && tintR == 130 && tintG == 255 && tintB == 130) { tile->frame(0); }
-      if (tint == 255 && tintR == 102 && tintG == 255 && tintB == 102) { tile->frame(0); }
-      if (tint == 255 && tintR == 80 && tintG == 255 && tintB == 80)   { tile->frame(13); }
-      if (tint == 255 && tintR == 51 && tintG == 255 && tintB == 51)   { tile->frame(11); }
-      if (tint == 255 && tintR == 30 && tintG == 255 && tintB == 30)   { tile->frame(12); }
+        if (tint == 255 && tintR == 255 && tintG == 230 && tintB == 230) { tile->frame(2); }
+        if (tint == 255 && tintR == 255 && tintG == 204 && tintB == 204) { tile->frame(3); }
+        if (tint == 255 && tintR == 255 && tintG == 180 && tintB == 180) { tile->frame(4); }
+        if (tint == 255 && tintR == 255 && tintG == 153 && tintB == 153) { tile->frame(5); }
+        if (tint == 255 && tintR == 255 && tintG == 130 && tintB == 130) { tile->frame(6); }
+        if (tint == 255 && tintR == 255 && tintG == 102 && tintB == 102) { tile->frame(7); }
+        if (tint == 255 && tintR == 255 && tintG == 80 && tintB == 80)   { tile->frame(8); }
+        if (tint == 255 && tintR == 255 && tintG == 51 && tintB == 51)   { tile->frame(9); }
+        if (tint == 255 && tintR == 255 && tintG == 30 && tintB == 30)   { tile->frame(10); }
 
-      if (tint == 255 && tintR == 0 && tintG == 255 && tintB == 0)   { tile->frame(12); }
-      if (tintG == 255 && tint == 225) { tile->frame(11); }
-      if (tintG == 255 && tint == 204) { tile->frame(13); }
-      if (tintG == 255 && tint == 175) { tile->frame(0); }
-      if (tintG == 255 && tint == 153) { tile->frame(0); }
-      if (tintG == 255 && tint == 125) { tile->frame(0); }
-      if (tintG == 255 && tint == 102) { tile->frame(0); }
-      if (tintG == 255 && tint == 75) { tile->frame(0); }
-      if (tintG == 255 && tint == 51) { tile->frame(0); }
-      if (tintG == 255 && tint == 25) { tile->frame(0); }
+        if (tint == 255 && tintR == 255 && tintG == 0 && tintB == 0)   { tile->frame(1); }
+        if (tintR == 255 && tint == 225) { tile->frame(2); }
+        if (tintR == 255 && tint == 204) { tile->frame(3); }
+        if (tintR == 255 && tint == 175) { tile->frame(4); }
+        if (tintR == 255 && tint == 153) { tile->frame(5); }
+        if (tintR == 255 && tint == 125) { tile->frame(6); }
+        if (tintR == 255 && tint == 102) { tile->frame(7); }
+        if (tintR == 255 && tint == 75) { tile->frame(8); }
+        if (tintR == 255 && tint == 51) { tile->frame(9); }
+        if (tintR == 255 && tint == 25) { tile->frame(10); }
 
-      if (tint == 255 && tintR == 230 && tintG == 230 && tintB == 255) { tile->frame(0); }
-      if (tint == 255 && tintR == 204 && tintG == 204 && tintB == 255) { tile->frame(0); }
-      if (tint == 255 && tintR == 180 && tintG == 180 && tintB == 255) { tile->frame(0); }
-      if (tint == 255 && tintR == 153 && tintG == 153 && tintB == 255) { tile->frame(0); }
-      if (tint == 255 && tintR == 130 && tintG == 130 && tintB == 255) { tile->frame(0); }
-      if (tint == 255 && tintR == 102 && tintG == 102 && tintB == 255) { tile->frame(0); }
-      if (tint == 255 && tintR == 80 && tintG == 80 && tintB == 255)   { tile->frame(21); }
-      if (tint == 255 && tintR == 51 && tintG == 51 && tintB == 255)   { tile->frame(19); }
-      if (tint == 255 && tintR == 30 && tintG == 30 && tintB == 255)   { tile->frame(20); }
+        if (tint == 255 && tintR == 230 && tintG == 255 && tintB == 230) { tile->frame(0); }
+        if (tint == 255 && tintR == 204 && tintG == 255 && tintB == 204) { tile->frame(0); }
+        if (tint == 255 && tintR == 180 && tintG == 255 && tintB == 180) { tile->frame(0); }
+        if (tint == 255 && tintR == 153 && tintG == 255 && tintB == 153) { tile->frame(0); }
+        if (tint == 255 && tintR == 130 && tintG == 255 && tintB == 130) { tile->frame(0); }
+        if (tint == 255 && tintR == 102 && tintG == 255 && tintB == 102) { tile->frame(0); }
+        if (tint == 255 && tintR == 80 && tintG == 255 && tintB == 80)   { tile->frame(13); }
+        if (tint == 255 && tintR == 51 && tintG == 255 && tintB == 51)   { tile->frame(11); }
+        if (tint == 255 && tintR == 30 && tintG == 255 && tintB == 30)   { tile->frame(12); }
 
-      if (tint == 255 && tintR == 0 && tintG == 0 && tintB == 255)   { tile->frame(20); }
-      if (tintB == 255 && tint == 225) { tile->frame(19); }
-      if (tintB == 255 && tint == 204) { tile->frame(21); }
-      if (tintB == 255 && tint == 175) { tile->frame(0); }
-      if (tintB == 255 && tint == 153) { tile->frame(0); }
-      if (tintB == 255 && tint == 125) { tile->frame(0); }
-      if (tintB == 255 && tint == 102) { tile->frame(0); }
-      if (tintB == 255 && tint == 75) { tile->frame(0); }
-      if (tintB == 255 && tint == 51) { tile->frame(0); }
-      if (tintB == 255 && tint == 25) { tile->frame(0); }
+        if (tint == 255 && tintR == 0 && tintG == 255 && tintB == 0)   { tile->frame(12); }
+        if (tintG == 255 && tint == 225) { tile->frame(11); }
+        if (tintG == 255 && tint == 204) { tile->frame(13); }
+        if (tintG == 255 && tint == 175) { tile->frame(0); }
+        if (tintG == 255 && tint == 153) { tile->frame(0); }
+        if (tintG == 255 && tint == 125) { tile->frame(0); }
+        if (tintG == 255 && tint == 102) { tile->frame(0); }
+        if (tintG == 255 && tint == 75) { tile->frame(0); }
+        if (tintG == 255 && tint == 51) { tile->frame(0); }
+        if (tintG == 255 && tint == 25) { tile->frame(0); }
+
+        if (tint == 255 && tintR == 230 && tintG == 230 && tintB == 255) { tile->frame(0); }
+        if (tint == 255 && tintR == 204 && tintG == 204 && tintB == 255) { tile->frame(0); }
+        if (tint == 255 && tintR == 180 && tintG == 180 && tintB == 255) { tile->frame(0); }
+        if (tint == 255 && tintR == 153 && tintG == 153 && tintB == 255) { tile->frame(0); }
+        if (tint == 255 && tintR == 130 && tintG == 130 && tintB == 255) { tile->frame(0); }
+        if (tint == 255 && tintR == 102 && tintG == 102 && tintB == 255) { tile->frame(0); }
+        if (tint == 255 && tintR == 80 && tintG == 80 && tintB == 255)   { tile->frame(21); }
+        if (tint == 255 && tintR == 51 && tintG == 51 && tintB == 255)   { tile->frame(19); }
+        if (tint == 255 && tintR == 30 && tintG == 30 && tintB == 255)   { tile->frame(20); }
+
+        if (tint == 255 && tintR == 0 && tintG == 0 && tintB == 255)   { tile->frame(20); }
+        if (tintB == 255 && tint == 225) { tile->frame(19); }
+        if (tintB == 255 && tint == 204) { tile->frame(21); }
+        if (tintB == 255 && tint == 175) { tile->frame(0); }
+        if (tintB == 255 && tint == 153) { tile->frame(0); }
+        if (tintB == 255 && tint == 125) { tile->frame(0); }
+        if (tintB == 255 && tint == 102) { tile->frame(0); }
+        if (tintB == 255 && tint == 75) { tile->frame(0); }
+        if (tintB == 255 && tint == 51) { tile->frame(0); }
+        if (tintB == 255 && tint == 25) { tile->frame(0); }
+      }
 
       counter += heightmap->bitdepth;
       tcounter++;
@@ -144,4 +161,27 @@ void Enemy::Master2Grid()
 	this->addChild(field);
   this->scale = Point2(2,2);
   std::cout << "added field as child of this enemy" << std::endl;
+}
+
+void Enemy::DestroyPart(int partnumber)
+{
+  if (destroyedparts.size() != 0)
+  {
+    for (int i = 0; i  < destroyedparts.size(); i ++)
+    {
+      if (destroyedparts[i] == partnumber) { std::cout << "this part was already destroyed!" << std::endl; break; }
+      else
+      {
+        destroyedparts.push_back(partnumber);
+        Master2Grid(destroyedparts);
+        std::cout << "Destroyed part: " << partnumber << std::endl;
+      }
+    }
+  }
+  else
+  {
+    destroyedparts.push_back(partnumber);
+    Master2Grid(destroyedparts);
+    std::cout << "Destroyed part: " << partnumber << std::endl;
+  }
 }

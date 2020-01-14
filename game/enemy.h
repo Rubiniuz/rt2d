@@ -24,7 +24,9 @@ public:
 
   void TGA2PixelSprite();
   void TGA2Grid(std::string tiles, std::string tga);
-  void Master2Grid();
+  void Master2Grid(std::vector<int> removedparts);
+
+  void DestroyPart(int partnumber);
 
   char enemySprite;
 
@@ -32,9 +34,12 @@ public:
 
   Canvas* can;
 
-private:
-  // a field of tiles
   Field* field;
+
+  std::vector<int> destroyedparts;
+
+private:
+
   Sprite* heightmapsprite;
 
   std::vector<char> cv;
