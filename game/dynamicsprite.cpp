@@ -50,16 +50,16 @@ void DynamicSprite::init(int width, int height, int pixelsize)
 {
 	this->scale = Point2(pixelsize, pixelsize);
 	// width, height, bitdepth, filter, wrap
-	PixelBuffer tmp = PixelBuffer(width/pixelsize, height/pixelsize, 4, 0, 0);
+	PixelBuffer tmp = PixelBuffer(width, height, 4, 0, 0);
 	this->addDynamicSprite(&tmp);
 
 	// get the pixels from the texture and make the framebuffer point to it
 	this->_framebuffer = this->sprite()->texture()->pixels();
 
-	this->_width = width/pixelsize;
-	this->_height = height/pixelsize;
+	this->_width = width;
+	this->_height = height;
 
-	backgroundcolor = RGBAColor(0, 0, 0, 0);
+	backgroundcolor = RGBAColor(255, 255, 255, 255);
 	this->fill(backgroundcolor);
 }
 
