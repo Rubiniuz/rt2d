@@ -42,8 +42,14 @@ void DynamicSprite::FromTGA(std::string tgafile, int width, int height, int tile
 	this->_width = width*tilewidth;
 	this->_height = height*tileheight;
 
-	backgroundcolor = RGBAColor(0, 0, 0, 0);
-	this->fill(backgroundcolor);
+	for(int x = 0; x < (width * tilewidth); x++)
+	{
+		for(int y = 0; y < (height * tileheight); y++)
+		{
+			this->_framebuffer->setPixel(x, y, sprite_container->sprite()->texture()->pixels()->getPixel(x,y));
+		}
+	}
+
 }
 
 void DynamicSprite::init(int width, int height, int pixelsize)
