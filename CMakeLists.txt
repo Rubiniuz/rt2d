@@ -197,6 +197,10 @@ IF(MAKE_GAME)
     game/player.h
     game/enemy.cpp
     game/enemy.h
+    game/basic.cpp
+    game/basic.h
+    game/dynamicsprite.cpp
+    game/dynamicsprite.h
     game/bullet.cpp
     game/bullet.h
     game/type_name.h
