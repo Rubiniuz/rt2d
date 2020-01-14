@@ -19,6 +19,8 @@ public:
 
   bool CheckPressed();
 
+  void Hover();
+
 private:
 
 };
