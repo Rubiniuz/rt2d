@@ -24,18 +24,13 @@ class DynamicSprite: public Entity
 		/// @brief constructor
 		DynamicSprite();
 		/// @brief overloaded constructor
-		DynamicSprite(int width, int height, int pixelsize);
+		DynamicSprite(std::string tgafile, int width, int height, int tilewidth, int tileheight, int pixelsize);
 		/// @brief destructor
 		virtual ~DynamicSprite();
 
 		/// @brief empty update function
 		virtual void update(float deltaTime);
-		/// @brief init the canvas
-		/// @param pixelsize defines how many screenpixels is 1 texturepixel
-		/// @param width and height define how many sprites are used
-		/// @param tilewidth and tileheight define how big the sprites are from the used spritesheet
-		/// @return void
-		void init(int width, int height, int pixelsize);
+		
 		/// @brief color a single pixel
 		/// @param x position of pixel
 		/// @param y position of pixel
