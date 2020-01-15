@@ -9,6 +9,7 @@ Player::Player() : Entity()
 	polar = Polar((rand()%360) * DEG_TO_RAD, 400.0f);
   rotspeed = 3.14f;
   bulletSpeed = 500.0f;
+  this->shoottimer.start();
 }
 
 Player::~Player()
@@ -74,15 +75,19 @@ void Player::updateSpaceShip(float deltaTime)
 
 void Player::ShootBullets()
 {
-  if (input()->getKeyDown( KeyCode::Space ))
+  if (input()->getKey( KeyCode::Space ))
   {
-    Bullet* tempBullet = new Bullet();
-    tempBullet->position = this->position;
-    tempBullet->rotation = this->rotation;
-    tempBullet->velocity = Vector2(cos(this->rotation.z),sin(this->rotation.z));
-    tempBullet->velocity *= bulletSpeed * 2;
-    this->playerBullets.push_back(tempBullet);
-    Scenemanager::getInstance()->getCurrentScene()->layers[1]->addChild(tempBullet);
+    if (this->shoottimer.seconds() >= 0.35)
+    {
+      Bullet* tempBullet = new Bullet();
+      tempBullet->position = this->position;
+      tempBullet->rotation = this->rotation;
+      tempBullet->velocity = Vector2(cos(this->rotation.z),sin(this->rotation.z));
+      tempBullet->velocity *= bulletSpeed * 2;
+      this->playerBullets.push_back(tempBullet);
+      Scenemanager::getInstance()->getCurrentScene()->layers[1]->addChild(tempBullet);
+      this->shoottimer.start();
+    }
   }
 }
 
