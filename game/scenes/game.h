@@ -31,6 +31,8 @@ public:
 
   Input* input;
 
+  void CheckEnemiesForPlayerBullets();
+
 private:
   Background* background;
   World* world;

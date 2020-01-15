@@ -67,4 +67,31 @@ void Game::update(float deltaTime)
   if (Singleton<Input>::instance()->getKey( KeyCode::Escape )) {
     this->stop();
   }
+  CheckEnemiesForPlayerBullets();
+}
+
+void Game::CheckEnemiesForPlayerBullets()
+{
+  for (int i = this->enemies.size() - 1; i >= 0; i--)
+  {
+    enemies[i]->position.x += 0.1;
+    int enemywidth = enemies[i]->width();
+    int enemyheight = enemies[i]->height();
+    int left = enemies[i]->position.x - enemywidth/2;
+    int right = enemies[i]->position.x + enemywidth/2;
+    int top = enemies[i]->position.y - enemyheight/2;
+    int bottom = enemies[i]->position.y + enemyheight/2;
+
+    for (int j = player->playerBullets.size() - 1; j >= 0; j--)
+    {
+      if (player->playerBullets[j]->position.x > left && player->playerBullets[j]->position.x < right
+        && player->playerBullets[j]->position.y > top && player->playerBullets[j]->position.y < bottom)
+      {
+        RGBAColor none = RGBAColor(0,0,0,0);
+        enemies[i]->mainsprite->setPixel(i,j, none);
+        player->playerBullets.erase(player->playerBullets.begin()+j);
+        Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(player->playerBullets[j]);
+      }
+    }
+  }
 }
