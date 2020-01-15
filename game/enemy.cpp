@@ -5,7 +5,8 @@ using namespace std;
 
 Enemy::Enemy() : Entity()
 {
-  mainsprite = new DynamicSprite("assets/error.tga", 4, 4, 4, 4, 16);
+  int pixelsize = 4;
+  mainsprite = new DynamicSprite("assets/error.tga", 1, 1, 16, 16, pixelsize);
   mainsprite->position = this->position;
   this->addChild(mainsprite);
   this->_width = mainsprite->width() * pixelsize;
