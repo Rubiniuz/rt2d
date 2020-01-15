@@ -30,7 +30,7 @@ class DynamicSprite: public Entity
 
 		/// @brief empty update function
 		virtual void update(float deltaTime);
-		
+
 		/// @brief color a single pixel
 		/// @param x position of pixel
 		/// @param y position of pixel
@@ -59,6 +59,12 @@ class DynamicSprite: public Entity
 		/// @return _height of canvas
 		int height() { return _height; };
 
+		Point2 worldposition() { return _worldposition; };
+		void worldposition(Point2 pos) { _worldposition = pos; };
+
+		int worldrotation() { return _worldrotation; };
+		void worldposition(int rot) { _worldrotation = rot; };
+
 		/// @brief the backgroundcolor of the canvas
 		RGBAColor backgroundcolor;
 
@@ -69,6 +75,9 @@ class DynamicSprite: public Entity
 		PixelBuffer* _framebuffer;
 		Sprite* dynamic_sprite;
 		Entity* sprite_container;
+
+		Point2 _worldposition;
+		int _worldrotation;
 
 		/// @brief width of the canvas
 		int _width;

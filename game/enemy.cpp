@@ -8,8 +8,8 @@ Enemy::Enemy() : Entity()
   mainsprite = new DynamicSprite("assets/error.tga", 4, 4, 4, 4, 16);
   mainsprite->position = this->position;
   this->addChild(mainsprite);
-  _width = mainsprite->width();
-  _height = mainsprite->height();
+  this->_width = mainsprite->width() * pixelsize;
+  this->_height = mainsprite->height() * pixelsize;
 }
 
 Enemy::~Enemy()

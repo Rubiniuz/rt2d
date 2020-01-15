@@ -18,7 +18,8 @@ DynamicSprite::~DynamicSprite()
 
 void DynamicSprite::update(float deltaTime)
 {
-
+	this->worldposition((this->position + this->parent()->position));
+  this->worldposition((this->rotation + this->parent()->position));
 }
 
 void DynamicSprite::FromTGA(std::string tgafile, int width, int height, int tilewidth, int tileheight, int pixelsize)
@@ -32,19 +33,19 @@ void DynamicSprite::FromTGA(std::string tgafile, int width, int height, int tile
 	dynamic_sprite->setupSpriteTGAPixelBuffer(tgafile, 0, 0);
 	sprite_container->addSprite(dynamic_sprite);
 
+	this->_width = width * tilewidth;
+	this->_height = height * tileheight;
+
 	// width, height, bitdepth, filter, wrap
-	PixelBuffer tmp = PixelBuffer(width*tilewidth, height*tileheight, 4, 0, 0);
+	PixelBuffer tmp = PixelBuffer(this->width(), this->height(), 4, 0, 0);
 	this->addDynamicSprite(&tmp);
 
 	// get the pixels from the texture and make the framebuffer point to it
 	this->_framebuffer = this->sprite()->texture()->pixels();
 
-	this->_width = width * tilewidth * pixelsize;
-	this->_height = height * tileheight * pixelsize;
-
-	for(int x = 0; x < this->_width; x++)
+	for(int x = 0; x < this->width(); x++)
 	{
-		for(int y = 0; y < this->_height; y++)
+		for(int y = 0; y < this->height(); y++)
 		{
 			this->_framebuffer->setPixel(x, y, sprite_container->sprite()->texture()->pixels()->getPixel(x,y));
 		}
