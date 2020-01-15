@@ -8,7 +8,7 @@ DynamicSprite::DynamicSprite() : Entity()
 
 DynamicSprite::DynamicSprite(std::string tgafile, int width, int height, int tilewidth, int tileheight, int pixelsize)	: Entity()
 {
-	this->FromTGA(tgafile, width, height, tilewidth, tileheight, pixelsize)
+	this->FromTGA(tgafile, width, height, tilewidth, tileheight, pixelsize);
 }
 
 DynamicSprite::~DynamicSprite()
