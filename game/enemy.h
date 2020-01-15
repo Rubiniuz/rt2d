@@ -20,7 +20,12 @@ public:
 
   void UseSprite(std::string toGet);
 
+  void CheckSprite(Point2 b);
+
   DynamicSprite* mainsprite;
+
+  int width() { return _width; };
+  int height() { return _height; };
 
 private:
 
@@ -28,6 +33,9 @@ private:
   int gridheight;
   int cellwidth;
   int cellheight;
+
+  int _width;
+  int _height;
 
 };
 
