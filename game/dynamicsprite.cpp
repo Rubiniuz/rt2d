@@ -18,8 +18,8 @@ DynamicSprite::~DynamicSprite()
 
 void DynamicSprite::update(float deltaTime)
 {
-	this->worldposition((this->position + this->parent()->position));
-  this->worldposition((this->rotation + this->parent()->position));
+	worldposition((this->position + this->parent()->position));
+  this->worldrotation((this->rotation + this->parent()->rotation));
 }
 
 void DynamicSprite::FromTGA(std::string tgafile, int width, int height, int tilewidth, int tileheight, int pixelsize)

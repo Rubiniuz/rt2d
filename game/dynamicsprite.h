@@ -62,8 +62,8 @@ class DynamicSprite: public Entity
 		Point2 worldposition() { return _worldposition; };
 		void worldposition(Point2 pos) { _worldposition = pos; };
 
-		int worldrotation() { return _worldrotation; };
-		void worldposition(int rot) { _worldrotation = rot; };
+		Point3 worldrotation() { return _worldrotation; };
+		void worldrotation(Point3 rot) { _worldrotation = rot; };
 
 		/// @brief the backgroundcolor of the canvas
 		RGBAColor backgroundcolor;
@@ -77,7 +77,7 @@ class DynamicSprite: public Entity
 		Entity* sprite_container;
 
 		Point2 _worldposition;
-		int _worldrotation;
+		Point3 _worldrotation;
 
 		/// @brief width of the canvas
 		int _width;
