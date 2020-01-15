@@ -5,10 +5,11 @@ using namespace std;
 
 Enemy::Enemy() : Entity()
 {
-  mainsprite = new DynamicSprite();
+  mainsprite = new DynamicSprite("assets/error.tga", 4, 4, 4, 4, 16);
   mainsprite->position = this->position;
-  mainsprite->FromTGA("assets/error.tga", 4, 4, 4, 4, 16);
   this->addChild(mainsprite);
+  _width = mainsprite->width();
+  _height = mainsprite->height();
 }
 
 Enemy::~Enemy()
