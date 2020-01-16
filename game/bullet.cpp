@@ -6,6 +6,8 @@ Bullet::Bullet() : Entity()
   this->sprite()->frame(0);
   t.start();
   life.start();
+  this->_width = 8;
+  this->_height = 4;
 }
 
 Bullet::~Bullet()
