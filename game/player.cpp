@@ -21,7 +21,6 @@ void Player::update(float deltaTime)
 {
   updateSpaceShip(deltaTime);
   ShootBullets();
-  CheckBullets();
 }
 
 void Player::UseSprite(string toGet)
@@ -87,18 +86,6 @@ void Player::ShootBullets()
       this->playerBullets.push_back(tempBullet);
       Scenemanager::getInstance()->getCurrentScene()->layers[1]->addChild(tempBullet);
       this->shoottimer.start();
-    }
-  }
-}
-
-void Player::CheckBullets()
-{
-  for (int i = this->playerBullets.size() - 1; i >= 0; i--)
-  {
-    if ( this->playerBullets[i]->life.seconds() > 3.0f)
-    {
-      playerBullets.erase(playerBullets.begin()+i);
-      Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(this->playerBullets[i]);
     }
   }
 }

@@ -23,7 +23,6 @@ public:
   void updateSpaceShip(float deltaTime);
 
   void ShootBullets();
-  void CheckBullets();
 
   Vector2 velocity;
   Polar polar;

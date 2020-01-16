@@ -32,6 +32,7 @@ public:
   Input* input;
 
   void CheckEnemiesForPlayerBullets();
+  void CheckPlayerBullets();
 
 private:
   Background* background;
