@@ -18,7 +18,7 @@ Bullet::~Bullet()
 void Bullet::update(float deltaTime)
 {
   this->position += this->velocity * deltaTime;
-  static int f = 0;
+  int f = 0;
   if (f > 4) { f = 0; }
 
   this->sprite()->frame(f);
@@ -26,4 +26,6 @@ void Bullet::update(float deltaTime)
     f++;
     t.start();
   }
+  this->worldposition((this->position + this->parent()->position));
+  this->worldrotation((this->rotation + this->parent()->rotation));
 }

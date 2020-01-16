@@ -22,11 +22,21 @@ public:
   /// @brief get the height of the canvas
   /// @return _height of canvas
   int height() { return _height; };
+
+  Point2 worldposition() { return _worldposition; };
+  void worldposition(Point2 pos) { _worldposition = pos; };
+
+  Point3 worldrotation() { return _worldrotation; };
+  void worldrotation(Point3 rot) { _worldrotation = rot; };
+
 private:
   /// @brief width of the canvas
   int _width;
   /// @brief height of the canvas
   int _height;
+
+  Point2 _worldposition;
+  Point3 _worldrotation;
 };
 
 #endif /* BULLET_H */
