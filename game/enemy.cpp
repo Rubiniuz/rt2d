@@ -6,7 +6,10 @@ using namespace std;
 Enemy::Enemy() : Entity()
 {
   int pixelsize = 4;
-  mainsprite = new DynamicSprite("assets/error.tga", 1, 1, 16, 16, pixelsize);
+  makesprite();
+  //mainsprite = new DynamicSprite("assets/error.tga", 1, 1, 16, 16, pixelsize);
+  mainsprite = new DynamicSprite();
+  mainsprite->FromSpriteSheet(spritedata, "assets/error.tga", 3, 3, 16, 16, pixelsize);
   mainsprite->position = this->position;
   this->addChild(mainsprite);
   this->_width = mainsprite->width() * pixelsize;
@@ -28,8 +31,8 @@ void Enemy::makesprite()
 {
   spritedata =
   {
-    0, 0, 0,
-    0, 0, 0,
+    1, 0, 0,
+    0, 1, 0,
     0, 0, 0
   };
 }

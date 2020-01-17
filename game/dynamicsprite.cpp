@@ -50,7 +50,39 @@ void DynamicSprite::FromTGA(std::string tgafile, int width, int height, int tile
 			this->_framebuffer->setPixel(x, y, sprite_container->sprite()->texture()->pixels()->getPixel(x,y));
 		}
 	}
+}
 
+void DynamicSprite::FromSpriteSheet(std::vector<int> data, std::string tgafile, int width, int height, int tilewidth, int tileheight, int pixelsize)
+{
+	this->scale = Point2(pixelsize, pixelsize);
+	sprite_container = new Basic();
+	sprite_container->position = this->position;
+	sprite_container->scale = this->scale;
+
+	dynamic_sprite = new Sprite();
+	dynamic_sprite->setupSpriteTGAPixelBuffer(tgafile, 0, 0);
+	sprite_container->addSprite(dynamic_sprite);
+
+	this->_width = width * tilewidth;
+	this->_height = height * tileheight;
+
+	// width, height, bitdepth, filter, wrap
+	PixelBuffer tmp = PixelBuffer(this->width(), this->height(), 4, 0, 0);
+	this->addDynamicSprite(&tmp);
+
+	// get the pixels from the texture and make the framebuffer point to it
+	this->_framebuffer = this->sprite()->texture()->pixels();
+
+	for (int i = 0; i < data.size(); i++)
+	{
+		for(int x = 0; x < this->width(); x++)
+		{
+			for(int y = 0; y < this->height(); y++)
+			{
+				this->_framebuffer->setPixel(x - (data[i] * tilewidth), y - (data[i] * tileheight), sprite_container->sprite()->texture()->pixels()->getPixel(x - (data[i] * tilewidth), y - (data[i] * tileheight)));
+			}
+		}
+	}
 }
 
 void DynamicSprite::setPixel(int x, int y, RGBAColor color)
