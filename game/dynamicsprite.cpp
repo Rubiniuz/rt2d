@@ -79,7 +79,11 @@ void DynamicSprite::FromSpriteSheet(std::vector<int> data, std::string tgafile, 
 		{
 			for(int y = 0; y < this->height(); y++)
 			{
+<<<<<<< HEAD
 				this->_framebuffer->setPixel(x - (data[i] * tilewidth), y - (data[i] * tileheight), sprite_container->sprite()->texture()->pixels()->getPixel(x - (data[i] * tilewidth), y - (data[i] * tileheight)));
+=======
+				this->_framebuffer->setPixel(x, y, sprite_container->sprite()->texture()->pixels()->getPixel(x + (data[i] * tilewidth), y + (data[i] * tileheight)));
+>>>>>>> e377159369763d6a87b0b477aaa44a3992c104de
 			}
 		}
 	}
