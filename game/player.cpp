@@ -33,12 +33,10 @@ void Player::updateSpaceShip(float deltaTime)
 	this->UseSprite("assets/spaceship.tga");
 
 	if (input()->getKey( KeyCode::W )) {
-		this->UseSprite("assets/spaceship.tga");
-		velocity += polar.cartesian() * deltaTime / 2; // thrust
+		velocity += polar.cartesian() * deltaTime * 1.5; // thrust
 	}
   if (input()->getKey( KeyCode::S )) {
-		this->UseSprite("assets/spaceship.tga");
-		velocity -= polar.cartesian() * deltaTime / 2; // thrust backwards
+		velocity -= polar.cartesian() * deltaTime * 1.5; // thrust backwards
 	}
 	if (input()->getKey( KeyCode::D )) {
 		polar.angle += rotspeed * deltaTime; // rotate right
