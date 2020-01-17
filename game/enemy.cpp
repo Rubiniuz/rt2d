@@ -23,3 +23,13 @@ void Enemy::update(float deltaTime)
 {
 
 }
+
+void Enemy::makesprite()
+{
+  spritedata =
+  {
+    0, 0, 0,
+    0, 0, 0,
+    0, 0, 0
+  };
+}

@@ -27,6 +27,10 @@ public:
   int width() { return _width; };
   int height() { return _height; };
 
+  std::vector<int> spritedata;
+
+  void makesprite();
+
 private:
 
   int gridwidth;
