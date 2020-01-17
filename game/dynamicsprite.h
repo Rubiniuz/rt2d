@@ -69,6 +69,7 @@ class DynamicSprite: public Entity
 		RGBAColor backgroundcolor;
 
 		void FromTGA(std::string tgafile, int width, int height, int tilewidth, int tileheight, int pixelsize);
+		void FromSpriteSheet(std::vector<int> data, std::string tgafile, int width, int height, int tilewidth, int tileheight, int pixelsize);
 
 	private:
 		/// @brief _framebuffer the internal pixelbuffer
