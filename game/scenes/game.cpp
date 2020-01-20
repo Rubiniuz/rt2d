@@ -93,7 +93,6 @@ void Game::CheckEnemiesForPlayerBullets(float deltaTime)
       //enemies[i]->position.x += 1 * deltaTime;
       enemies[i]->rotation.z += 1.5 * deltaTime;
       if (enemies[i]->rotation.z > 6.3) {enemies[i]->rotation.z = 0 + (enemies[i]->rotation.z - 6.29);}
-      std::cout << enemies[i]->rotation.z << std::endl;
       int enemywidth = enemies[i]->width();
       int enemyheight = enemies[i]->height();
       int left = enemies[i]->position.x - enemywidth/2;
