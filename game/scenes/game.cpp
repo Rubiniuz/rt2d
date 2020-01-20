@@ -67,7 +67,7 @@ void Game::update(float deltaTime)
   if (Singleton<Input>::instance()->getKey( KeyCode::Escape )) {
     this->stop();
   }
-  CheckEnemiesForPlayerBullets();
+  CheckEnemiesForPlayerBullets(deltaTime);
 }
 void Game::CheckPlayerBullets()
 {
@@ -84,13 +84,16 @@ void Game::CheckPlayerBullets()
   }
 }
 
-void Game::CheckEnemiesForPlayerBullets()
+void Game::CheckEnemiesForPlayerBullets(float deltaTime)
 {
   if (!this->enemies.empty())
   {
     for (int i = this->enemies.size() - 1; i >= 0; i--)
     {
-      enemies[i]->position.x += 0.1;
+      //enemies[i]->position.x += 1 * deltaTime;
+      enemies[i]->rotation.z += 1.5 * deltaTime;
+      if (enemies[i]->rotation.z > 6.3) {enemies[i]->rotation.z = 0 + (enemies[i]->rotation.z - 6.29);}
+      std::cout << enemies[i]->rotation.z << std::endl;
       int enemywidth = enemies[i]->width();
       int enemyheight = enemies[i]->height();
       int left = enemies[i]->position.x - enemywidth/2;
@@ -101,14 +104,15 @@ void Game::CheckEnemiesForPlayerBullets()
       {
         for (int j = player->playerBullets.size() - 1; j >= 0; j--)
         {
-          if (player->playerBullets[j]->position.x > left && player->playerBullets[j]->position.x < right
+          /*if (player->playerBullets[j]->position.x > left && player->playerBullets[j]->position.x < right
             && player->playerBullets[j]->position.y > top && player->playerBullets[j]->position.y < bottom)
           {
             RGBAColor none = RGBAColor(0,0,0,0);
             enemies[i]->mainsprite->setPixel(i,j, none);
             Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(player->playerBullets[j]);
             player->playerBullets.erase(player->playerBullets.begin()+j);
-          }
+          }*/
+
         }
       }
     }

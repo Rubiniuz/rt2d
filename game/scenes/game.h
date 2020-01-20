@@ -31,7 +31,7 @@ public:
 
   Input* input;
 
-  void CheckEnemiesForPlayerBullets();
+  void CheckEnemiesForPlayerBullets(float deltaTime);
   void CheckPlayerBullets();
 
 private:
