@@ -68,18 +68,16 @@ void Game::update(float deltaTime)
     this->stop();
   }
   CheckEnemiesForPlayerBullets(deltaTime);
+  CheckPlayerBullets();
 }
 void Game::CheckPlayerBullets()
 {
-  if (!player->playerBullets.empty())
+  for (int j = player->playerBullets.size() - 1; j >= 0; j--)
   {
-    for (int j = player->playerBullets.size() - 1; j >= 0; j--)
+    if (player->playerBullets[j]->life.seconds() > 5)
     {
-      if (player->playerBullets[j]->life.seconds() > 5)
-      {
-        Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(player->playerBullets[j]);
-        player->playerBullets.erase(player->playerBullets.begin()+j);
-      }
+      Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(player->playerBullets[j]);
+      player->playerBullets.erase(player->playerBullets.begin()+j);
     }
   }
 }
