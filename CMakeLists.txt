@@ -199,6 +199,8 @@ IF(MAKE_GAME)
     game/enemy.h
     game/basic.cpp
     game/basic.h
+    game/rect.cpp
+    game/rect.h
     game/dynamicsprite.cpp
     game/dynamicsprite.h
     game/bullet.cpp
