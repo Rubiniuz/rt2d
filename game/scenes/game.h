@@ -33,6 +33,8 @@ public:
 
   void CheckEnemiesForPlayerBullets(float deltaTime);
   void CheckPlayerBullets();
+  Point2 Rotate(Point2 point, int angle, Point2 center_of_rotation);
+
 
 private:
   Background* background;

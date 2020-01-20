@@ -93,27 +93,62 @@ void Game::CheckEnemiesForPlayerBullets(float deltaTime)
       //enemies[i]->position.x += 1 * deltaTime;
       enemies[i]->rotation.z += 1.5 * deltaTime;
       if (enemies[i]->rotation.z > 6.3) {enemies[i]->rotation.z = 0 + (enemies[i]->rotation.z - 6.29);}
+
       int enemywidth = enemies[i]->width();
       int enemyheight = enemies[i]->height();
+
       int left = enemies[i]->position.x - enemywidth/2;
       int right = enemies[i]->position.x + enemywidth/2;
       int top = enemies[i]->position.y - enemyheight/2;
       int bottom = enemies[i]->position.y + enemyheight/2;
+
+      RGBAColor none = RGBAColor(0,0,0,0);
+
       if (!player->playerBullets.empty())
       {
         for (int j = player->playerBullets.size() - 1; j >= 0; j--)
         {
-          /*if (player->playerBullets[j]->position.x > left && player->playerBullets[j]->position.x < right
-            && player->playerBullets[j]->position.y > top && player->playerBullets[j]->position.y < bottom)
+          Point2 toUse = this->Rotate(player->playerBullets[j]->position, player->playerBullets[j]->rotation.z, enemies[i]->position);
+
+          if (toUse.x > left && toUse.x < right
+            && toUse.y > top && toUse.y < bottom)
           {
-            RGBAColor none = RGBAColor(0,0,0,0);
-            enemies[i]->mainsprite->setPixel(i,j, none);
+            Point2 toDestroy = Point2(0,0);
+            int ppuX = enemies[i]->mainsprite->width() / enemies[i]->width();
+            int ppuY = enemies[i]->mainsprite->height() / enemies[i]->height();
+
+            if (toUse.x < right && toUse.x > enemies[i]->position.x){ toDestroy.x = (enemies[i]->mainsprite->width() / 2) + (toUse.x * ppuX); }
+            if (toUse.x > left && toUse.x < enemies[i]->position.x){ toDestroy.x = (enemies[i]->mainsprite->width() / 2) - (toUse.x * ppuX); }
+
+            if (toUse.y > bottom && toUse.x < enemies[i]->position.y){ toDestroy.y = (enemies[i]->mainsprite->height() / 2) + (toUse.y * ppuY); }
+            if (toUse.y < top && toUse.y > enemies[i]->position.x){ toDestroy.y = (enemies[i]->mainsprite->height() / 2) - (toUse.y * ppuY); }
+
+            std::cout << "----- HIT! -----" << std::endl;
+            std::cout << "Destroyed Pixel: " << (int)toDestroy.x << " , " << (int)toDestroy.y << std::endl;
+
+            enemies[i]->mainsprite->setPixel((int)toDestroy.x,(int)toDestroy.y, none);
             Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(player->playerBullets[j]);
             player->playerBullets.erase(player->playerBullets.begin()+j);
-          }*/
-
+          }
         }
       }
     }
   }
+}
+
+Point2 Game::Rotate(Point2 point, int angle, Point2 center_of_rotation)
+{
+  angle *= 57.295779513082320876798154814105;
+  float sinus   = sin(angle);
+  float cosinus = cos(angle);
+  Point2 temp;
+
+  point.x  = point.x - center_of_rotation.x;
+  point.y  = point.y - center_of_rotation.y;
+  temp.x = point.x * cosinus - point.y * sinus;
+  temp.y = point.x * sinus   + point.y * cosinus;
+  point.x  =  temp.x + center_of_rotation.x;
+  point.y  =  temp.y + center_of_rotation.y;
+
+  return point;
 }
