@@ -121,13 +121,10 @@ void Game::CheckEnemiesForPlayerBullets(float deltaTime)
             if (toUse.y < bottom && toUse.y > enemies[i]->position.y){ toDestroy.y = (enemies[i]->mainsprite->height() / 2) + toUse.y; }
             if (toUse.y > top && toUse.y < enemies[i]->position.y){ toDestroy.y = (enemies[i]->mainsprite->height() / 2) - toUse.y; }
 
-            std::cout << "----- HIT! -----" << std::endl;
-
             int _x = rand() % enemies[i]->mainsprite->width();
             int _y = rand() % enemies[i]->mainsprite->height();
 
             enemies[i]->mainsprite->setPixel(_x,_y, none);
-            std::cout << "Destroyed Pixel: " << _x << " , " << _y << std::endl;
             Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(player->playerBullets[j]);
             player->playerBullets.erase(player->playerBullets.begin()+j);
           }
