@@ -42,9 +42,9 @@ void Game::MakeBackground()
 
 void Game::AddEntities()
 {
-  for (int i = 0; i < 1; i++) {
+  for (int i = 0; i < 3; i++) {
     Enemy* enemy = new Enemy();
-    enemy->position = Point3((125 * i + 10), 50, 0);
+    enemy->position = Point3((350 * i + 250), 150, 0);
     enemies.push_back(enemy);
     layers[1]->addChild(enemy);
   }
@@ -112,19 +112,22 @@ void Game::CheckEnemiesForPlayerBullets(float deltaTime)
             && toUse.y > top && toUse.y < bottom)
           {
             Point2 toDestroy = Point2(0,0);
-            int ppuX = enemies[i]->mainsprite->width() / enemies[i]->width();
-            int ppuY = enemies[i]->mainsprite->height() / enemies[i]->height();
+            //int ppuX = enemies[i]->mainsprite->width() / enemies[i]->width();
+            //int ppuY = enemies[i]->mainsprite->height() / enemies[i]->height();
 
-            if (toUse.x < right && toUse.x > enemies[i]->position.x){ toDestroy.x = (enemies[i]->mainsprite->width() / 2) + (toUse.x * ppuX); }
-            if (toUse.x > left && toUse.x < enemies[i]->position.x){ toDestroy.x = (enemies[i]->mainsprite->width() / 2) - (toUse.x * ppuX); }
+            if (toUse.x < right && toUse.x > enemies[i]->position.x){ toDestroy.x = (enemies[i]->mainsprite->width() / 2) + toUse.x; }
+            if (toUse.x > left && toUse.x < enemies[i]->position.x){ toDestroy.x = (enemies[i]->mainsprite->width() / 2) - toUse.x; }
 
-            if (toUse.y > bottom && toUse.x < enemies[i]->position.y){ toDestroy.y = (enemies[i]->mainsprite->height() / 2) + (toUse.y * ppuY); }
-            if (toUse.y < top && toUse.y > enemies[i]->position.x){ toDestroy.y = (enemies[i]->mainsprite->height() / 2) - (toUse.y * ppuY); }
+            if (toUse.y < bottom && toUse.y > enemies[i]->position.y){ toDestroy.y = (enemies[i]->mainsprite->height() / 2) + toUse.y; }
+            if (toUse.y > top && toUse.y < enemies[i]->position.y){ toDestroy.y = (enemies[i]->mainsprite->height() / 2) - toUse.y; }
 
             std::cout << "----- HIT! -----" << std::endl;
-            std::cout << "Destroyed Pixel: " << (int)toDestroy.x << " , " << (int)toDestroy.y << std::endl;
 
-            enemies[i]->mainsprite->setPixel((int)toDestroy.x,(int)toDestroy.y, none);
+            int _x = rand() % enemies[i]->mainsprite->width();
+            int _y = rand() % enemies[i]->mainsprite->height();
+
+            enemies[i]->mainsprite->setPixel(_x,_y, none);
+            std::cout << "Destroyed Pixel: " << _x << " , " << _y << std::endl;
             Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(player->playerBullets[j]);
             player->playerBullets.erase(player->playerBullets.begin()+j);
           }
