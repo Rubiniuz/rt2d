@@ -2,6 +2,8 @@
 #define RECT_H
 
 #include <rt2d/pointx.h>
+#include "bullet.h"
+#include "enemy.h"
 
 class Rect
 {
@@ -9,6 +11,15 @@ public:
 
   Rect(Point2 scale1, Point2 pos1, Point2 scale2, Point2 pos2);
   ~Rect();
+
+  void SATEnemyToBullet(Enemy* aa, Bullet* bb);
+
+  Point2 GetPointRotated(float Xpos, float Ypos, float Rot, float Xos, float Yos);
+
+  float Getdot(Point2 a, Point2 b);
+
+  float GetLowest(float one, float two, float three, float four);
+  float GetHighest(float one, float two, float three, float four);
 
   Point2 a(){return _a;};
   Point2 b(){return _b;};
@@ -41,8 +52,8 @@ private:
   Point2 _e;
   Point2 _f;
   Point2 _g;
-  Point2 _h
-  ;
+  Point2 _h;
+
   Point2 _axis3;
   Point2 _axis4;
 
