@@ -7,7 +7,7 @@ Player::Player() : Entity()
   this->addSprite("assets/spaceship.tga");
   velocity = Vector2(0,0);
 	polar = Polar((rand()%360) * DEG_TO_RAD, 400.0f);
-  rotspeed = 3.14f;
+  rotspeed = 3.0f;
   bulletSpeed = 500.0f;
   this->shoottimer.start();
 }
@@ -33,10 +33,10 @@ void Player::updateSpaceShip(float deltaTime)
 	this->UseSprite("assets/spaceship.tga");
 
 	if (input()->getKey( KeyCode::W )) {
-		velocity += polar.cartesian() * deltaTime * 1.5; // thrust
+		velocity += polar.cartesian() * deltaTime * 2.5; // thrust
 	}
   if (input()->getKey( KeyCode::S )) {
-		velocity -= polar.cartesian() * deltaTime * 1.5; // thrust backwards
+		velocity -= polar.cartesian() * deltaTime * 2.5; // thrust backwards
 	}
 	if (input()->getKey( KeyCode::D )) {
 		polar.angle += rotspeed * deltaTime; // rotate right
