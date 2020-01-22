@@ -8,6 +8,7 @@
 
 #include "scenemanager.h"
 #include "dynamicsprite.h"
+#include "bullet.h"
 
 class Enemy : public Entity
 {
@@ -31,6 +32,10 @@ public:
 
   void makesprite();
 
+  void changeAngle(Point2 player);
+
+  void shootBullet();
+
   int health;
   int pixelsdestroyed;
   int pixelstobedestroyed;
@@ -38,10 +43,15 @@ public:
   Point2 target;
 
   Timer finder;
+  Timer shoottimer;
 
   float timetofindplayer;
 
   float speed;
+
+  Point2 dir;
+
+  std::vector<Bullet*> bullets;
 
 private:
 

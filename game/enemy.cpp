@@ -6,6 +6,7 @@ using namespace std;
 Enemy::Enemy() : Entity()
 {
   finder.start();
+  shoottimer.start();
   timetofindplayer = 0;
   speed = 0;
   int pixelsize = 2;
@@ -34,15 +35,11 @@ Enemy::~Enemy()
 void Enemy::update(float deltaTime)
 {
    Point2 velocity = Point2(0,0);
-   Point2 dir = Point2(target.x - this->position.x , target.y - this->position.y);
+   dir = Point2(target.x - this->position.x , target.y - this->position.y);
 
    float mag = sqrt(dir.x*dir.x + dir.y*dir.y);
 
    dir = Point2(dir.x / mag, dir.y / mag);
-
-   double angle = std::atan2( dir.y, dir.x );
-
-   this->rotation.z = angle;
 
    dir = Point2(dir.x * 0.5, dir.y * 0.5);
 
@@ -54,6 +51,31 @@ void Enemy::update(float deltaTime)
    if (velocity.y > 15) { velocity.y = 15; }
 
    this->position = Point2(this->position.x + velocity.x , this->position.y + velocity.y);
+   shootBullet();
+ }
+
+ void Enemy::shootBullet()
+ {
+   if (this->shoottimer.seconds() >= timetofindplayer)
+   {
+     Bullet* tempBullet = new Bullet();
+     tempBullet->position = this->position;
+     tempBullet->rotation = this->rotation;
+     tempBullet->velocity = Vector2(cos(this->rotation.z),sin(this->rotation.z));
+     tempBullet->velocity *= 150;
+     this->bullets.push_back(tempBullet);
+     Scenemanager::getInstance()->getCurrentScene()->layers[1]->addChild(tempBullet);
+     this->shoottimer.start();
+   }
+ }
+
+ void Enemy::changeAngle(Point2 player)
+ {
+   dir = Point2(player.x - this->position.x , player.y - this->position.y);
+   float mag = sqrt(dir.x*dir.x + dir.y*dir.y);
+   dir = Point2(dir.x / mag, dir.y / mag);
+   double angle = std::atan2( dir.y, dir.x );
+   this->rotation.z = angle;
  }
 
 void Enemy::makesprite()
