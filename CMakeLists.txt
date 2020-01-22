@@ -201,6 +201,8 @@ IF(MAKE_GAME)
     game/basic.h
     game/rect.cpp
     game/rect.h
+    game/sat.cpp
+    game/sat.h
     game/dynamicsprite.cpp
     game/dynamicsprite.h
     game/bullet.cpp
