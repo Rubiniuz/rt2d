@@ -74,7 +74,7 @@ void Player::ShootBullets()
 {
   if (input()->getKey( KeyCode::Space ))
   {
-    if (this->shoottimer.seconds() >= 0.35)
+    if (this->shoottimer.seconds() >= 0.125)
     {
       Bullet* tempBullet = new Bullet();
       tempBullet->position = this->position;
