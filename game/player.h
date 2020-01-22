@@ -33,6 +33,8 @@ public:
 
   std::vector<Bullet*> playerBullets;
 
+  int playerLives;
+
 private:
 
 };

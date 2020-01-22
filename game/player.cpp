@@ -4,6 +4,7 @@ using namespace std;
 
 Player::Player() : Entity()
 {
+  playerLives = 10;
   this->addSprite("assets/spaceship.tga");
   velocity = Vector2(0,0);
 	polar = Polar((rand()%360) * DEG_TO_RAD, 400.0f);
