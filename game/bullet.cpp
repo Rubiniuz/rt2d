@@ -17,7 +17,7 @@ Bullet::~Bullet()
 
 void Bullet::update(float deltaTime)
 {
-  this->position += this->velocity * deltaTime;
+  this->position += this->velocity * deltaTime * 5;
   int f = 0;
   if (f > 4) { f = 0; }
 
