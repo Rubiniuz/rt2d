@@ -72,17 +72,22 @@ void DynamicSprite::FromSpriteSheet(std::vector<int> data, std::string tgafile, 
 
 	// get the pixels from the texture and make the framebuffer point to it
 	this->_framebuffer = this->sprite()->texture()->pixels();
-	int datapos = -1;
+	int datapos = -2;
 	for (int i = 0; i < height; i++)
 	{
+		if ( i == 0) { }
+		else { datapos++; }
 		for (int j = 0; j < width; j++)
 		{
-			datapos++;
+			if ( j == 0) { }
+			else { datapos++; }
 			for(int x = 0; x < tilewidth; x++)
 			{
 				for(int y = 0; y < tileheight; y++)
 				{
-					this->_framebuffer->setPixel(j * tilewidth + x, i * tileheight + y, sprite_container->sprite()->texture()->pixels()->getPixel(data[datapos] * tilewidth + x, data[datapos] * tileheight + y));
+					this->_framebuffer->setPixel(j * tilewidth + x, i * tileheight + y,
+						//sprite_container->sprite()->texture()->pixels()->getPixel(data[datapos] * tilewidth + x, data[datapos] * tileheight + y));
+						sprite_container->sprite()->texture()->pixels()->getPixel(j * tilewidth + x, i * tileheight + y));
 				}
 			}
 		}
