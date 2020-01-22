@@ -71,6 +71,7 @@ void Game::update(float deltaTime)
     this->stop();
   }
   CheckEnemiesForPlayerBullets(deltaTime);
+  CheckPlayerForEnemyBullets();
   CheckBullets();
 }
 void Game::CheckBullets()
@@ -95,6 +96,32 @@ void Game::CheckBullets()
     }
   }
 
+}
+
+void Game::CheckPlayerForEnemyBullets()
+{
+  for (int k = this->enemies.size() - 1; k >= 0; k--)
+  {
+    for (int l = enemies[k]->bullets.size() - 1; l >= 0; l--)
+    {
+      int xpos = enemies[k]->bullets[l]->position.x;
+      int ypos = enemies[k]->bullets[l]->position.y;
+
+      int left = player->position.x - player->sprite()->width()/2;
+      int right = player->position.x + player->sprite()->width()/2;
+      int top = player->position.y - player->sprite()->height()/2;
+      int bottom = player->position.y + player->sprite()->height()/2;
+
+      if (xpos > left && xpos < right && ypos > top && ypos < bottom)
+      {
+        Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(enemies[k]->bullets[l]);
+        enemies[k]->bullets.erase(enemies[k]->bullets.begin()+l);
+        player->playerLives--;
+        if (player->playerLives <= 0) { Scenemanager::getInstance()->GoToScene("titlescreen"); }
+      }
+
+    }
+  }
 }
 
 void Game::CheckEnemiesForPlayerBullets(float deltaTime)
