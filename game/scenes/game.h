@@ -32,7 +32,7 @@ public:
   Input* input;
 
   void CheckEnemiesForPlayerBullets(float deltaTime);
-  void CheckPlayerBullets();
+  void CheckBullets();
   Point2 Rotate(Point2 point, int angle, Point2 center_of_rotation);
 
 

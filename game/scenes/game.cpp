@@ -71,9 +71,9 @@ void Game::update(float deltaTime)
     this->stop();
   }
   CheckEnemiesForPlayerBullets(deltaTime);
-  CheckPlayerBullets();
+  CheckBullets();
 }
-void Game::CheckPlayerBullets()
+void Game::CheckBullets()
 {
   for (int j = player->playerBullets.size() - 1; j >= 0; j--)
   {
@@ -83,6 +83,18 @@ void Game::CheckPlayerBullets()
       player->playerBullets.erase(player->playerBullets.begin()+j);
     }
   }
+  for (int k = this->enemies.size() - 1; k >= 0; k--)
+  {
+    for (int l = enemies[k]->bullets.size() - 1; l >= 0; l--)
+    {
+      if (enemies[k]->bullets[l]->life.seconds() > 5)
+      {
+        Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(enemies[k]->bullets[l]);
+        enemies[k]->bullets.erase(enemies[k]->bullets.begin()+l);
+      }
+    }
+  }
+
 }
 
 void Game::CheckEnemiesForPlayerBullets(float deltaTime)
@@ -91,15 +103,15 @@ void Game::CheckEnemiesForPlayerBullets(float deltaTime)
   {
     for (int i = this->enemies.size() - 1; i >= 0; i--)
     {
-      //enemies[i]->position.x += 1 * deltaTime;
-      enemies[i]->rotation.z += 1.5 * deltaTime;
       if (enemies[i]->rotation.z > 6.3) {enemies[i]->rotation.z = 0 + (enemies[i]->rotation.z - 6.29);}
 
       if (enemies[i]->finder.seconds() > enemies[i]->timetofindplayer * (1 + (enemies[i]->pixelsdestroyed / 100)))
       {
         enemies[i]->target = Point2(player->position.x, player->position.y);
         enemies[i]->finder.start();
+        enemies[i]->changeAngle(player->position);
       }
+      else{enemies[i]->changeAngle(player->position);}
 
       int enemywidth = enemies[i]->width();
       int enemyheight = enemies[i]->height();
@@ -132,8 +144,6 @@ void Game::CheckEnemiesForPlayerBullets(float deltaTime)
 
             int _x = rand() % enemies[i]->mainsprite->width();
             int _y = rand() % enemies[i]->mainsprite->height();
-
-
 
             if (enemies[i]->mainsprite->getPixel(_x,_y) != none) { enemies[i]->mainsprite->setPixel(_x,_y, none); enemies[i]->pixelsdestroyed ++; }
             if (enemies[i]->mainsprite->getPixel(_x +1,_y +1) != none) { enemies[i]->mainsprite->setPixel(_x +1,_y +1, none); enemies[i]->pixelsdestroyed ++; }
