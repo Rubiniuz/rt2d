@@ -90,7 +90,14 @@ void TitleScreen::update(float deltaTime)
     if (b->CheckPressed())
     {
       std::cout << "Button got pressed!" << std::endl;
-      if (b == buttons[0]) { std::cout << "Going to Game" << std::endl; Scenemanager::getInstance()->GoToScene("game");}
+      if (b == buttons[0])
+      {
+        std::cout << "Going to Game" << std::endl;
+        Scenemanager::getInstance()->scenes.erase(Scenemanager::getInstance()->scenes.end() - 1);
+        Scenemanager::getInstance()->scenenames.erase(Scenemanager::getInstance()->scenenames.end() - 1);
+        Scenemanager::getInstance()->AddScene(new Game("game"));
+        Scenemanager::getInstance()->GoToScene("game");
+      }
       if (b == buttons[1]) { std::cout << "Going to Credits" << std::endl; Scenemanager::getInstance()->GoToScene("credits");  }
       if (b == buttons[2]) { std::cout << "Exiting" << std::endl; wtq = true;}
     }

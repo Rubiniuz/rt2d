@@ -13,7 +13,7 @@
 #include "../ui/background.h"
 
 #include "../scenemanager.h"
-
+#include "game.h"
 
 class TitleScreen : public MyScene
 {
