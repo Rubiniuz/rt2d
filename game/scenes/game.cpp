@@ -44,7 +44,10 @@ void Game::AddEntities()
 {
   for (int i = 0; i < 3; i++) {
     Enemy* enemy = new Enemy();
-    enemy->position = Point3((350 * i + 250), 150, 0);
+    enemy->position = Point3((350 * (i + 1) + 250), 150, 0);
+    enemy->target = Point2((425 * (i + 1) + 250), 350);
+    enemy->timetofindplayer = 1.6 * (i + 1) * 1.353;
+    enemy->speed = (i + 1) * 1.25 *( (rand() % 5) + 1);
     enemies.push_back(enemy);
     layers[1]->addChild(enemy);
   }
@@ -92,6 +95,12 @@ void Game::CheckEnemiesForPlayerBullets(float deltaTime)
       enemies[i]->rotation.z += 1.5 * deltaTime;
       if (enemies[i]->rotation.z > 6.3) {enemies[i]->rotation.z = 0 + (enemies[i]->rotation.z - 6.29);}
 
+      if (enemies[i]->finder.seconds() > enemies[i]->timetofindplayer * (1 + (enemies[i]->pixelsdestroyed / 100)))
+      {
+        enemies[i]->target = Point2(player->position.x, player->position.y);
+        enemies[i]->finder.start();
+      }
+
       int enemywidth = enemies[i]->width();
       int enemyheight = enemies[i]->height();
 
@@ -124,7 +133,18 @@ void Game::CheckEnemiesForPlayerBullets(float deltaTime)
             int _x = rand() % enemies[i]->mainsprite->width();
             int _y = rand() % enemies[i]->mainsprite->height();
 
-            enemies[i]->mainsprite->setPixel(_x,_y, none);
+
+
+            if (enemies[i]->mainsprite->getPixel(_x,_y) != none) { enemies[i]->mainsprite->setPixel(_x,_y, none); enemies[i]->pixelsdestroyed ++; }
+            if (enemies[i]->mainsprite->getPixel(_x +1,_y +1) != none) { enemies[i]->mainsprite->setPixel(_x +1,_y +1, none); enemies[i]->pixelsdestroyed ++; }
+            if (enemies[i]->mainsprite->getPixel(_x,_y +1) != none) { enemies[i]->mainsprite->setPixel(_x,_y +1, none); enemies[i]->pixelsdestroyed ++; }
+            if (enemies[i]->mainsprite->getPixel(_x +1,_y) != none) { enemies[i]->mainsprite->setPixel(_x +1,_y, none); enemies[i]->pixelsdestroyed ++; }
+
+            if (enemies[i]->pixelsdestroyed > enemies[i]->pixelstobedestroyed)
+            {
+              Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(enemies[i]);
+              enemies.erase(enemies.begin()+i);
+            }
             Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(player->playerBullets[j]);
             player->playerBullets.erase(player->playerBullets.begin()+j);
           }

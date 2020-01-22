@@ -31,6 +31,18 @@ public:
 
   void makesprite();
 
+  int health;
+  int pixelsdestroyed;
+  int pixelstobedestroyed;
+
+  Point2 target;
+
+  Timer finder;
+
+  float timetofindplayer;
+
+  float speed;
+
 private:
 
   int gridwidth;
