@@ -52,13 +52,21 @@ void Game::AddEntities()
     layers[1]->addChild(enemy);
   }
 
-  Enemy* enemy = new Enemy("assets/speeder.tga");
-  enemy->position = Point3((350 * 5 + 250), 150, 0);
-  enemy->target = Point2((425 * 5 + 250), 350);
-  enemy->timetofindplayer = 1.6 * 5 * 1.353;
-  enemy->speed = 5 * 1.25 *( (rand() % 5) + 1);
-  enemies.push_back(enemy);
-  layers[1]->addChild(enemy);
+  Enemy* speeder = new Enemy("assets/speeder.tga", 3, 3, 16, 16, 2);
+  speeder->position = Point3((125 * 3.2 + 360), 895, 0);
+  speeder->target = Point2((45 * 2.5 + 150), 870);
+  speeder->timetofindplayer = 1.6 * 3 * 1.353;
+  speeder->speed = 3 * 1.25 *( (rand() % 3) + 1);
+  enemies.push_back(speeder);
+  layers[1]->addChild(speeder);
+
+  Enemy* carier = new Enemy("assets/carier.tga", 4, 4, 16, 16, 2);
+  carier->position = Point3((270 * 2.5 + 170), 150, 0);
+  carier->target = Point2((210 * 3.2 + 180), 287);
+  carier->timetofindplayer = 1.6 * 2 * 1.353;
+  carier->speed = 2 * 1.25 *( (rand() % 5) + 1);
+  enemies.push_back(carier);
+  layers[1]->addChild(carier);
 
   player = new Player();
   layers[1]->addChild(player);
