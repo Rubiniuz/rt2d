@@ -67,10 +67,12 @@ void Enemy::update(float deltaTime)
 
    Point2 acceleration = Point2(dir.x / (speed * (pixelsdestroyed / 100 + 1)) , dir.y / (pixelsdestroyed / 100 + 1));
 
-   velocity = Point2(velocity.x + acceleration.x , velocity.y + acceleration.y);
+   acceleration = Point2(acceleration.x * deltaTime * speed, acceleration.y * deltaTime * speed);
 
-   if (velocity.x > 15) { velocity.x = 15; }
-   if (velocity.y > 15) { velocity.y = 15; }
+   velocity = Point2(velocity.x + acceleration.x * speed, velocity.y + acceleration.y * speed);
+
+   if (velocity.x > 10) { velocity.x = 10; }
+   if (velocity.y > 10) { velocity.y = 10; }
 
    this->position = Point2(this->position.x + velocity.x , this->position.y + velocity.y);
  }
