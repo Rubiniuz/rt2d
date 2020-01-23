@@ -26,6 +26,29 @@ Enemy::Enemy() : Entity()
   pixelstobedestroyed = mainsprite->width() * mainsprite->height() / 64 * pixelsize;
 }
 
+Enemy::Enemy(std::string tgafile) : Entity()
+{
+    finder.start();
+    shoottimer.start();
+    timetofindplayer = 0;
+    speed = 0;
+    int pixelsize = 2;
+    makesprite();
+    //mainsprite = new DynamicSprite("assets/error.tga", 1, 1, 16, 16, pixelsize);
+    mainsprite = new DynamicSprite();
+    mainsprite->FromSpriteSheet(spritedata, tgafile, 3, 3, 16, 16, pixelsize);
+    mainsprite->position = this->position;
+    this->addChild(mainsprite);
+    this->_width = mainsprite->width() * pixelsize;
+    this->_height = mainsprite->height() * pixelsize;
+
+    target = this->position;
+
+    health = 5;
+    pixelsdestroyed = 0;
+    pixelstobedestroyed = mainsprite->width() * mainsprite->height() / 64 * pixelsize;
+}
+
 Enemy::~Enemy()
 {
   delete mainsprite;

@@ -14,6 +14,7 @@ class Enemy : public Entity
 {
 public:
   Enemy();
+  Enemy(std::string tgafile);
 
   virtual ~Enemy();
 
