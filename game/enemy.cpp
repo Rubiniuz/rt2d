@@ -51,21 +51,25 @@ void Enemy::update(float deltaTime)
    if (velocity.y > 15) { velocity.y = 15; }
 
    this->position = Point2(this->position.x + velocity.x , this->position.y + velocity.y);
-   shootBullet();
  }
 
- void Enemy::shootBullet()
+ void Enemy::shootBullet(Point2 player)
  {
+   this->distance = sqrt( ( (player.x - this->position.x) * (player.x - this->position.x) ) + ( (player.y - this->position.y) * (player.y - this->position.y) ) );
+
    if (this->shoottimer.seconds() >= timetofindplayer)
    {
-     Bullet* tempBullet = new Bullet();
-     tempBullet->position = this->position;
-     tempBullet->rotation = this->rotation;
-     tempBullet->velocity = Vector2(cos(this->rotation.z),sin(this->rotation.z));
-     tempBullet->velocity *= 150;
-     this->bullets.push_back(tempBullet);
-     Scenemanager::getInstance()->getCurrentScene()->layers[1]->addChild(tempBullet);
-     this->shoottimer.start();
+     if (this->distance < 450)
+     {
+       Bullet* tempBullet = new Bullet();
+       tempBullet->position = this->position;
+       tempBullet->rotation = this->rotation;
+       tempBullet->velocity = Vector2(cos(this->rotation.z),sin(this->rotation.z));
+       tempBullet->velocity *= 150;
+       this->bullets.push_back(tempBullet);
+       Scenemanager::getInstance()->getCurrentScene()->layers[1]->addChild(tempBullet);
+       this->shoottimer.start();
+     }
    }
  }
 

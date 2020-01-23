@@ -34,7 +34,7 @@ public:
 
   void changeAngle(Point2 player);
 
-  void shootBullet();
+  void shootBullet(Point2 player);
 
   int health;
   int pixelsdestroyed;
@@ -46,6 +46,8 @@ public:
   Timer shoottimer;
 
   float timetofindplayer;
+
+  float distance;
 
   float speed;
 

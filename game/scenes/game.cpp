@@ -139,6 +139,7 @@ void Game::CheckEnemiesForPlayerBullets(float deltaTime)
         enemies[i]->changeAngle(player->position);
       }
       else{enemies[i]->changeAngle(player->position);}
+      enemies[i]->shootBullet(player->position);
 
       int enemywidth = enemies[i]->width();
       int enemyheight = enemies[i]->height();
