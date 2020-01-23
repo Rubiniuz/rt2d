@@ -23,20 +23,19 @@ Enemy::Enemy() : Entity()
 
   health = 5;
   pixelsdestroyed = 0;
-  pixelstobedestroyed = mainsprite->width() * mainsprite->height() / 64 * pixelsize;
+  pixelstobedestroyed = mainsprite->width() * mainsprite->height() / 128 * pixelsize;
 }
 
-Enemy::Enemy(std::string tgafile) : Entity()
+Enemy::Enemy(std::string tgafile, int width, int height, int tilewidth, int tileheight, int pixelsize) : Entity()
 {
     finder.start();
     shoottimer.start();
     timetofindplayer = 0;
     speed = 0;
-    int pixelsize = 2;
     makesprite();
     //mainsprite = new DynamicSprite("assets/error.tga", 1, 1, 16, 16, pixelsize);
     mainsprite = new DynamicSprite();
-    mainsprite->FromSpriteSheet(spritedata, tgafile, 3, 3, 16, 16, pixelsize);
+    mainsprite->FromSpriteSheet(spritedata, tgafile, width, height, tilewidth, tileheight, pixelsize);
     mainsprite->position = this->position;
     this->addChild(mainsprite);
     this->_width = mainsprite->width() * pixelsize;
@@ -86,9 +85,9 @@ void Enemy::update(float deltaTime)
      {
        Bullet* tempBullet = new Bullet();
        tempBullet->position = this->position;
-       tempBullet->rotation = this->rotation;
-       tempBullet->velocity = Vector2(cos(this->rotation.z),sin(this->rotation.z));
-       tempBullet->velocity *= 150;
+       tempBullet->rotation.z = this->rotation.z;
+       tempBullet->velocity = Vector2(cos(tempBullet->rotation.z),sin(tempBullet->rotation.z));
+       tempBullet->velocity *= 75;
        this->bullets.push_back(tempBullet);
        Scenemanager::getInstance()->getCurrentScene()->layers[1]->addChild(tempBullet);
        this->shoottimer.start();

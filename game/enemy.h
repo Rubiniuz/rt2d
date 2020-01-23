@@ -14,7 +14,7 @@ class Enemy : public Entity
 {
 public:
   Enemy();
-  Enemy(std::string tgafile);
+  Enemy(std::string tgafile, int width, int height, int tilewidth, int tileheight, int pixelsize);
 
   virtual ~Enemy();
 
