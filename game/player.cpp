@@ -47,7 +47,6 @@ void Player::updateSpaceShip(float deltaTime)
     this->UseSprite("assets/spaceship-boosting.tga");
     if (shoottimer.seconds() >= 1)
     {
-      std::cout << "boosting" << std::endl;
 	    velocity += polar.cartesian() * 2.5; // boost
       shoottimer.start();
     }
