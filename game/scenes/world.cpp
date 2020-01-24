@@ -3,17 +3,17 @@
 World::World() : Entity()
 {
   std::cout << "World Constructor" << std::endl;
-  gridwidth = 64;
-	gridheight = 64;
-	cellwidth = 32;
-	cellheight = 32;
+  gridwidth = 32;
+	gridheight = 32;
+	cellwidth = 64;
+	cellheight = 64;
 
 	RGBAColor wall       =		RGBAColor(255, 255, 255);
 
 	// fill field of tiles
 	field = new Field();
 	//field->addGrid(AUTOGENWHITE, 1, 1, gridwidth, gridheight, cellwidth, cellheight);
-	field->addGrid("assets/worldtiles.tga", 8, 8, gridwidth, gridheight, cellwidth, cellheight);
+	field->addGrid("assets/worldtiles.tga", 4, 4, gridwidth, gridheight, cellwidth, cellheight);
 
 	heightmapsprite = new Sprite();
 	heightmapsprite->setupSpriteTGAPixelBuffer("assets/colormap64.tga", 0, 2);
