@@ -30,6 +30,7 @@ public:
   float bulletSpeed;
 
   Timer shoottimer;
+  Timer boosttimer;
 
   std::vector<Bullet*> playerBullets;
 

@@ -6,11 +6,13 @@ Player::Player() : Entity()
 {
   playerLives = 10;
   this->addSprite("assets/spaceship.tga");
+  this->scale = Point2(2,2);
   velocity = Vector2(0,0);
 	polar = Polar((rand()%360) * DEG_TO_RAD, 400.0f);
   rotspeed = 3.0f;
   bulletSpeed = 500.0f;
-  this->shoottimer.start();
+  shoottimer.start();
+  boosttimer.start();
 }
 
 Player::~Player()
@@ -34,16 +36,29 @@ void Player::updateSpaceShip(float deltaTime)
 	this->UseSprite("assets/spaceship.tga");
 
 	if (input()->getKey( KeyCode::W )) {
-		velocity += polar.cartesian() * deltaTime * 2.5; // thrust
+		velocity += (polar.cartesian() * deltaTime) * 2.5; // thrust
+    this->UseSprite("assets/spaceship-thrusting.tga");
 	}
   if (input()->getKey( KeyCode::S )) {
-		velocity -= polar.cartesian() * deltaTime * 2.5; // thrust backwards
+		velocity -= (polar.cartesian() * deltaTime) * 2.5; // thrust backwards
+    this->UseSprite("assets/spaceship-braking.tga");
+	}
+  if (input()->getKey( KeyCode::LeftShift )) {
+    this->UseSprite("assets/spaceship-boosting.tga");
+    if (shoottimer.seconds() >= 1)
+    {
+      std::cout << "boosting" << std::endl;
+	    velocity += polar.cartesian() * 2.5; // boost
+      shoottimer.start();
+    }
 	}
 	if (input()->getKey( KeyCode::D )) {
 		polar.angle += rotspeed * deltaTime; // rotate right
+    this->UseSprite("assets/spaceship-right.tga");
 	}
 	if (input()->getKey( KeyCode::A )) {
 		polar.angle -= rotspeed * deltaTime; // rotate left
+    this->UseSprite("assets/spaceship-left.tga");
 	}
 
   float coefficient = 0.5;
@@ -52,19 +67,19 @@ void Player::updateSpaceShip(float deltaTime)
   friction.normalize();
   friction *= coefficient;
 
-  velocity += friction;
+  if (velocity >= Vector2(10,10))  { velocity += friction; }
 
-  if (this->position.x < 32){ this->position.x = 32; }
-  if (this->position.x > 1984){ this->position.x = 1984; }
-  if (this->position.y < 32){ this->position.y = 32; }
-  if (this->position.y > 1984){ this->position.y = 1984; }
+  if (this->position.x < 128){ this->position.x = 130; }
+  if (this->position.x > 3904){ this->position.x = 3902; }
+  if (this->position.y < 128){ this->position.y = 130; }
+  if (this->position.y > 3904){ this->position.y = 3902; }
 
-  if (Scenemanager::getInstance()->getCamera()->position.x < 32){ Scenemanager::getInstance()->getCamera()->position.x = 32; }
-  if (Scenemanager::getInstance()->getCamera()->position.x > 1984){ Scenemanager::getInstance()->getCamera()->position.x = 1984; }
-  if (Scenemanager::getInstance()->getCamera()->position.y < 32){ Scenemanager::getInstance()->getCamera()->position.y = 32; }
-  if (Scenemanager::getInstance()->getCamera()->position.y > 1984){ Scenemanager::getInstance()->getCamera()->position.y = 1984; }
+  if (Scenemanager::getInstance()->getCamera()->position.x < 128){ Scenemanager::getInstance()->getCamera()->position.x = 130; }
+  if (Scenemanager::getInstance()->getCamera()->position.x > 3904){ Scenemanager::getInstance()->getCamera()->position.x = 3902; }
+  if (Scenemanager::getInstance()->getCamera()->position.y < 128){ Scenemanager::getInstance()->getCamera()->position.y = 130; }
+  if (Scenemanager::getInstance()->getCamera()->position.y > 3904){ Scenemanager::getInstance()->getCamera()->position.y = 3902; }
 
-  velocity.limit(400);
+  velocity.limit(1000);
 
 	this->rotation.z = polar.angle;
 	this->position += velocity * deltaTime;

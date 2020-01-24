@@ -8,6 +8,7 @@ Bullet::Bullet() : Entity()
   life.start();
   this->_width = 8;
   this->_height = 4;
+  this->scale = Point2(2,2);
 }
 
 Bullet::~Bullet()
@@ -21,11 +22,11 @@ void Bullet::update(float deltaTime)
   int f = 0;
   if (f > 4) { f = 0; }
 
-  this->sprite()->frame(f);
-  if (t.seconds() > 0.05f) {
+  if (t.seconds() > 0.25f) {
     f++;
     t.start();
   }
+  this->sprite()->frame(f);
   this->worldposition((this->position + this->parent()->position));
   this->worldrotation((this->rotation + this->parent()->rotation));
 }
