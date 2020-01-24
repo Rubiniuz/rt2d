@@ -8,6 +8,9 @@ World::World() : Entity()
 	cellwidth = 64;
 	cellheight = 64;
 
+  _width = gridwidth * cellwidth;
+  _height = gridheight * cellheight;
+
 	RGBAColor wall       =		RGBAColor(255, 255, 255);
 
 	// fill field of tiles

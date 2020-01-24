@@ -18,8 +18,8 @@ Game::Game(std::string name) : MyScene("game")
 		this->addChild(layer);
     layers.push_back(layer);
 	}
-  AddEntities();
   MakeBackground();
+  AddEntities();
   initialized = true;
 }
 

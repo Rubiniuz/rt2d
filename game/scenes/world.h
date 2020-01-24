@@ -12,10 +12,16 @@ public:
 
 	virtual void update(float deltaTime);
 
+	int width(){ return _width; };
+	int height(){ return _height; };
+
 private:
 	// a field of tiles
 	Field* field;
 	Sprite* heightmapsprite;
+
+	int _width;
+	int _height;
 
 	int gridwidth;
 	int gridheight;
