@@ -9,6 +9,8 @@ Game::Game(std::string name) : MyScene("game")
   wtq = false;
   fpstimer.start();
 
+  score = 0;
+
   //input = new Input();
 
   top_layer = 3; // 3 layers (0-2)
@@ -18,9 +20,19 @@ Game::Game(std::string name) : MyScene("game")
 		this->addChild(layer);
     layers.push_back(layer);
 	}
+  for (unsigned int i = 0; i <= 4; i++) {
+    Text* line = new Text();
+    line->scale = Point2(0.5f, 0.5f);
+
+    text.push_back(line);
+    layers[2]->addChild(line);
+	}
   MakeBackground();
   AddEntities();
   initialized = true;
+  text[0]->message("Score: ");
+  text[1]->message("PlayerLives:");
+  text[2]->message("Enemies remaining: ");
 }
 
 Game::~Game()
@@ -87,6 +99,24 @@ void Game::update(float deltaTime)
   if (Singleton<Input>::instance()->getKey( KeyCode::Escape )) {
     this->stop();
   }
+  for (int i = 0; i < text.size() - 1; i++)
+  {
+    text[i]->position.x = player->position.x - SWIDTH / 2 + 25;
+    text[i]->position.y = player->position.y - SHEIGHT / 2 + 25 + (25*i);
+  }
+
+  std::stringstream scoremessage;
+  scoremessage << "Score: " << score;
+  text[0]->message(scoremessage.str());
+
+  std::stringstream playermessage;
+  playermessage << "PlayerLives: " << player->playerLives;
+  text[1]->message(playermessage.str());
+
+  std::stringstream enemiesmessage;
+  enemiesmessage << "Enemies remaining: " << enemies.size();
+  text[2]->message(enemiesmessage.str());
+
   CheckEnemiesForPlayerBullets(deltaTime);
   CheckPlayerForEnemyBullets();
   CheckBullets();
@@ -190,15 +220,16 @@ void Game::CheckEnemiesForPlayerBullets(float deltaTime)
             int _x = rand() % enemies[i]->mainsprite->width();
             int _y = rand() % enemies[i]->mainsprite->height();
 
-            if (enemies[i]->mainsprite->getPixel(_x,_y) != none) { enemies[i]->mainsprite->setPixel(_x,_y, none); enemies[i]->pixelsdestroyed ++; }
-            if (enemies[i]->mainsprite->getPixel(_x +1,_y +1) != none) { enemies[i]->mainsprite->setPixel(_x +1,_y +1, none); enemies[i]->pixelsdestroyed ++; }
-            if (enemies[i]->mainsprite->getPixel(_x,_y +1) != none) { enemies[i]->mainsprite->setPixel(_x,_y +1, none); enemies[i]->pixelsdestroyed ++; }
-            if (enemies[i]->mainsprite->getPixel(_x +1,_y) != none) { enemies[i]->mainsprite->setPixel(_x +1,_y, none); enemies[i]->pixelsdestroyed ++; }
+            if (enemies[i]->mainsprite->getPixel(_x,_y) != none) { enemies[i]->mainsprite->setPixel(_x,_y, none); enemies[i]->pixelsdestroyed++; score += 5; }
+            if (enemies[i]->mainsprite->getPixel(_x +1,_y +1) != none) { enemies[i]->mainsprite->setPixel(_x +1,_y +1, none); enemies[i]->pixelsdestroyed++; score += 5; }
+            if (enemies[i]->mainsprite->getPixel(_x,_y +1) != none) { enemies[i]->mainsprite->setPixel(_x,_y +1, none); enemies[i]->pixelsdestroyed++; score += 5; }
+            if (enemies[i]->mainsprite->getPixel(_x +1,_y) != none) { enemies[i]->mainsprite->setPixel(_x +1,_y, none); enemies[i]->pixelsdestroyed++; score += 5; }
 
             if (enemies[i]->pixelsdestroyed > enemies[i]->pixelstobedestroyed)
             {
               Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(enemies[i]);
               enemies.erase(enemies.begin()+i);
+              score += 100;
             }
             Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(player->playerBullets[j]);
             player->playerBullets.erase(player->playerBullets.begin()+j);

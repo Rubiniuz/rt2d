@@ -6,6 +6,7 @@
 #include <rt2d/vectorx.h>
 #include <rt2d/texture.h>
 #include <rt2d/input.h>
+#include <rt2d/text.h>
 
 #include "../myscene.h"
 #include "../layer.h"
@@ -36,6 +37,9 @@ public:
   void CheckBullets();
   Point2 Rotate(Point2 point, int angle, Point2 center_of_rotation);
 
+  int score;
+
+  std::vector<Text*> text;
 
 private:
   Background* background;
@@ -45,6 +49,9 @@ private:
   Point3 GetPlayerRotation();
   Player* player;
   Timer fpstimer;
+
+  
+
 };
 
 #endif /* GAME_H */
