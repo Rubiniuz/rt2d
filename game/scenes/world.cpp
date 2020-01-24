@@ -3,8 +3,8 @@
 World::World() : Entity()
 {
   std::cout << "World Constructor" << std::endl;
-  gridwidth = 32;
-	gridheight = 32;
+  gridwidth = 64;
+	gridheight = 64;
 	cellwidth = 64;
 	cellheight = 64;
 
