@@ -9,6 +9,8 @@ Game::Game(std::string name) : MyScene("game")
   wtq = false;
   fpstimer.start();
 
+  srand(time(NULL));
+
   score = 0;
 
   //input = new Input();
@@ -28,7 +30,15 @@ Game::Game(std::string name) : MyScene("game")
     layers[2]->addChild(line);
 	}
   MakeBackground();
-  AddEntities();
+
+  this->wavenumber = 0;
+
+  player = new Player();
+  layers[1]->addChild(player);
+  player->position = Point3(SWIDTH/2, SHEIGHT/2, 0);
+
+  SpawnWave();
+
   initialized = true;
   text[0]->message("Score: ");
   text[1]->message("PlayerLives:");
@@ -105,6 +115,12 @@ void Game::update(float deltaTime)
     text[i]->position.y = player->position.y - SHEIGHT / 2 + 25 + (25*i);
   }
 
+  if (enemies.size() <= 1)
+  {
+    enemies.clear();
+    SpawnWave();
+  }
+
   std::stringstream scoremessage;
   scoremessage << "Score: " << score;
   text[0]->message(scoremessage.str());
@@ -114,7 +130,7 @@ void Game::update(float deltaTime)
   text[1]->message(playermessage.str());
 
   std::stringstream enemiesmessage;
-  enemiesmessage << "Enemies remaining: " << enemies.size();
+  enemiesmessage << "Enemies remaining: " << enemies.size() - 1;
   text[2]->message(enemiesmessage.str());
 
   CheckEnemiesForPlayerBullets(deltaTime);
@@ -221,9 +237,16 @@ void Game::CheckEnemiesForPlayerBullets(float deltaTime)
             int _y = rand() % enemies[i]->mainsprite->height();
 
             if (enemies[i]->mainsprite->getPixel(_x,_y) != none) { enemies[i]->mainsprite->setPixel(_x,_y, none); enemies[i]->pixelsdestroyed++; score += 5; }
-            if (enemies[i]->mainsprite->getPixel(_x +1,_y +1) != none) { enemies[i]->mainsprite->setPixel(_x +1,_y +1, none); enemies[i]->pixelsdestroyed++; score += 5; }
-            if (enemies[i]->mainsprite->getPixel(_x,_y +1) != none) { enemies[i]->mainsprite->setPixel(_x,_y +1, none); enemies[i]->pixelsdestroyed++; score += 5; }
-            if (enemies[i]->mainsprite->getPixel(_x +1,_y) != none) { enemies[i]->mainsprite->setPixel(_x +1,_y, none); enemies[i]->pixelsdestroyed++; score += 5; }
+            if (enemies[i]->mainsprite->getPixel(_x + 1,_y) != none) { enemies[i]->mainsprite->setPixel(_x + 1,_y, none); enemies[i]->pixelsdestroyed++; score += 5; }
+            if (enemies[i]->mainsprite->getPixel(_x + 2,_y) != none) { enemies[i]->mainsprite->setPixel(_x + 2,_y, none); enemies[i]->pixelsdestroyed++; score += 5; }
+
+            if (enemies[i]->mainsprite->getPixel(_x,_y + 1) != none) { enemies[i]->mainsprite->setPixel(_x,_y + 1, none); enemies[i]->pixelsdestroyed++; score += 5; }
+            if (enemies[i]->mainsprite->getPixel(_x + 1,_y + 1) != none) { enemies[i]->mainsprite->setPixel(_x + 1,_y + 1, none); enemies[i]->pixelsdestroyed++; score += 5; }
+            if (enemies[i]->mainsprite->getPixel(_x + 2,_y + 1) != none) { enemies[i]->mainsprite->setPixel(_x + 2,_y + 1, none); enemies[i]->pixelsdestroyed++; score += 5; }
+
+            if (enemies[i]->mainsprite->getPixel(_x,_y + 2) != none) { enemies[i]->mainsprite->setPixel(_x,_y + 2, none); enemies[i]->pixelsdestroyed++; score += 5; }
+            if (enemies[i]->mainsprite->getPixel(_x + 1,_y + 2) != none) { enemies[i]->mainsprite->setPixel(_x + 1,_y + 2, none); enemies[i]->pixelsdestroyed++; score += 5; }
+            if (enemies[i]->mainsprite->getPixel(_x + 2,_y + 2) != none) { enemies[i]->mainsprite->setPixel(_x + 2,_y + 2, none); enemies[i]->pixelsdestroyed++; score += 5; }
 
             if (enemies[i]->pixelsdestroyed > enemies[i]->pixelstobedestroyed)
             {
@@ -255,4 +278,24 @@ Point2 Game::Rotate(Point2 point, int angle, Point2 center_of_rotation)
   point.y  =  temp.y + center_of_rotation.y;
 
   return point;
+}
+
+void Game::SpawnWave()
+{
+  enemies.clear();
+  wavenumber++;
+  std::cout << "wavenumber: " << wavenumber << std::endl;
+  for (int i = 0; i < 2 * wavenumber; i++)
+  {
+    int r = rand() % 200;
+    r *= 5;
+    Enemy* temp = new Enemy(spritenames[ i % 3 ], spriteDimensions[ i % 3 ].x, spriteDimensions[ i % 3 ].y, 16, 16, 2);
+    temp->position = Point3(wavenumber * 350 + (150 * i) + r, i * 150 + (200 * wavenumber) + r,0);
+    temp->target = Point2(350 * i + (150 * wavenumber) + r, 150 * wavenumber + (200 * i) + r);
+    temp->timetofindplayer = 5 - (wavenumber * i % 3);
+    temp->speed = 15 + (3 * wavenumber);
+    enemies.push_back(temp);
+    layers[1]->addChild(temp);
+    srand(i % 3);
+  }
 }

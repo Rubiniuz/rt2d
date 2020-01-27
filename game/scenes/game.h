@@ -37,9 +37,17 @@ public:
   void CheckBullets();
   Point2 Rotate(Point2 point, int angle, Point2 center_of_rotation);
 
+  void SpawnWave();
+
   int score;
 
   std::vector<Text*> text;
+
+  std::vector<Enemy*> waveEnemies;
+
+  std::vector<std::string> spritenames = { "assets/cruiser.tga" , "assets/fighter.tga" , "assets/carier.tga" };
+  std::vector<Point2> spriteDimensions = { Point2(2,3) , Point2(3,3) , Point2(4,4)};
+  int wavenumber;
 
 private:
   Background* background;
@@ -49,8 +57,6 @@ private:
   Point3 GetPlayerRotation();
   Player* player;
   Timer fpstimer;
-
-  
 
 };
 
