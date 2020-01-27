@@ -203,6 +203,8 @@ IF(MAKE_GAME)
     game/rect.h
     game/sat.cpp
     game/sat.h
+    game/explosion.cpp
+    game/explosion.h
     game/dynamicsprite.cpp
     game/dynamicsprite.h
     game/bullet.cpp

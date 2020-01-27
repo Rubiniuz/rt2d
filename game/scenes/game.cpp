@@ -121,6 +121,18 @@ void Game::update(float deltaTime)
     SpawnWave();
   }
 
+  if (!this->explosions.empty())
+  {
+    for (int i = this->explosions.size() - 1; i >= 0; i--)
+    {
+      if (explosions[i]->currentframe > 6)
+      {
+        layers[1]->removeChild(explosions[i]);
+        explosions.erase(explosions.begin()+i);
+      }
+    }
+  }
+
   std::stringstream scoremessage;
   scoremessage << "Score: " << score;
   text[0]->message(scoremessage.str());
@@ -250,6 +262,11 @@ void Game::CheckEnemiesForPlayerBullets(float deltaTime)
 
             if (enemies[i]->pixelsdestroyed > enemies[i]->pixelstobedestroyed)
             {
+              Explosion* tempE = new Explosion(3); // 2 is size
+              tempE->position = enemies[i]->position;
+              explosions.push_back(tempE);
+              layers[1]->addChild(tempE);
+
               Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(enemies[i]);
               enemies.erase(enemies.begin()+i);
               score += 100;
