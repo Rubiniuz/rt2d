@@ -23,7 +23,7 @@ Enemy::Enemy() : Entity()
 
   health = 5;
   pixelsdestroyed = 0;
-  pixelstobedestroyed = mainsprite->width() * mainsprite->height() / 128 * pixelsize;
+  pixelstobedestroyed = (mainsprite->width() / 128 * pixelsize) + (mainsprite->height() / 128 * pixelsize);
 }
 
 Enemy::Enemy(std::string tgafile, int width, int height, int tilewidth, int tileheight, int pixelsize) : Entity()
@@ -83,7 +83,7 @@ void Enemy::update(float deltaTime)
 
    if (this->shoottimer.seconds() >= timetofindplayer)
    {
-     if (this->distance < 450)
+     if (this->distance < 650)
      {
        Bullet* tempBullet = new Bullet();
        tempBullet->position = this->position;
