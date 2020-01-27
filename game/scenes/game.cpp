@@ -262,7 +262,7 @@ void Game::CheckEnemiesForPlayerBullets(float deltaTime)
 
             if (enemies[i]->pixelsdestroyed > enemies[i]->pixelstobedestroyed)
             {
-              Explosion* tempE = new Explosion(3); // 2 is size
+              Explosion* tempE = new Explosion(4 + i); // 2 is size
               tempE->position = enemies[i]->position;
               explosions.push_back(tempE);
               layers[1]->addChild(tempE);
