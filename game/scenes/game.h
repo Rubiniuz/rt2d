@@ -50,6 +50,8 @@ public:
   std::vector<Point2> spriteDimensions = { Point2(2,3) , Point2(3,3) , Point2(4,4)};
   int wavenumber;
 
+  Button* exitbutton;
+
 private:
   Background* background;
   World* world;

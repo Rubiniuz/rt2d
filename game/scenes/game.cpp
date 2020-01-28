@@ -114,6 +114,14 @@ void Game::update(float deltaTime)
     text[i]->position.x = player->position.x - SWIDTH / 2 + 25;
     text[i]->position.y = player->position.y - SHEIGHT / 2 + 25 + (25*i);
   }
+  if (player->playerLives <= 0)
+  {
+    if (Singleton<Input>::instance()->getMouseDown(0) == true)
+    {
+      Scenemanager::getInstance()->GoToScene("titlescreen");
+    }
+  }
+
 
   if (enemies.size() <= 1)
   {
@@ -192,9 +200,15 @@ void Game::CheckPlayerForEnemyBullets()
         Scenemanager::getInstance()->getCurrentScene()->layers[1]->removeChild(enemies[k]->bullets[l]);
         enemies[k]->bullets.erase(enemies[k]->bullets.begin()+l);
         player->playerLives--;
-        if (player->playerLives <= 0) { Scenemanager::getInstance()->GoToScene("titlescreen"); }
       }
-
+      if (player->playerLives <= 0)
+      {
+        exitbutton = new Button("assets/exitbutton.tga");
+        exitbutton->position = Point2(player->position.x, player->position.y);
+        exitbutton->scale = Point3(3.0f, 3.0f, 0.0f);
+        layers[1]->addChild(exitbutton);
+        layers[1]->removeChild(player);
+      }
     }
   }
 }
@@ -301,7 +315,6 @@ void Game::SpawnWave()
 {
   enemies.clear();
   wavenumber++;
-  std::cout << "wavenumber: " << wavenumber << std::endl;
   for (int i = 0; i < 2 * wavenumber; i++)
   {
     int r = rand() % 200;
