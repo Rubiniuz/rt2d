@@ -23,9 +23,6 @@ Explosion::~Explosion()
 
 void Explosion::update(float deltaTime)
 {
-  width = 10;
-  width += rand() % 300;
-  
   if (t.seconds() > 0.05f) {
     currentframe++;
     t.start();
